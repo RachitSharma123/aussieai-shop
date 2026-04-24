@@ -1,0 +1,212 @@
+---
+const services = [
+  {
+    icon: '🤖',
+    name: 'AI Chatbot',
+    tagline: 'Answer every customer, instantly.',
+    desc: 'A smart assistant on your website, WhatsApp, Instagram, or Facebook. Answers questions, takes bookings, handles FAQs — 24/7.',
+    usecases: ['Cafe: take orders & reservations', 'Clinic: book appointments', 'Tradie: quote requests & availability'],
+    glow: 'rgba(0,212,106,0.15)',
+    accent: '#00d46a',
+  },
+  {
+    icon: '⚡',
+    name: 'Workflow Automation',
+    tagline: 'Kill the copy-paste jobs.',
+    desc: 'Connect your tools so they talk to each other automatically. Invoice sent when job is done. Calendar updated when booking lands.',
+    usecases: ['Auto-send invoices on job completion', 'Sync bookings to Google Calendar', 'Daily summary reports to your phone'],
+    glow: 'rgba(255,193,0,0.12)',
+    accent: '#ffc100',
+  },
+  {
+    icon: '📞',
+    name: 'AI Receptionist',
+    tagline: 'Never miss a call or enquiry.',
+    desc: 'An AI that handles inbound enquiries across WhatsApp and Telegram, qualifies leads, books appointments, and notifies you only when needed.',
+    usecases: ['Route enquiries to right person', 'Capture leads while on the job', 'Send follow-up messages automatically'],
+    glow: 'rgba(0,184,217,0.15)',
+    accent: '#00b8d9',
+  },
+  {
+    icon: '🖥️',
+    name: 'IT & Microsoft 365',
+    tagline: 'Tech that just works.',
+    desc: 'Setup, support, and management of your Microsoft 365, emails, and devices. No jargon, no waiting on hold.',
+    usecases: ['Email setup & security (DMARC/SPF)', 'New staff onboarding & offboarding', 'Device management & troubleshooting'],
+    glow: 'rgba(180,80,255,0.12)',
+    accent: '#b450ff',
+  },
+];
+---
+
+<section class="services" id="services">
+  <!-- Subtle grid background -->
+  <div class="grid-bg"></div>
+
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">What we do</span>
+      <h2 class="section-title">
+        Four ways we save you<br />
+        <span class="serif-em">time and money</span>
+      </h2>
+      <p class="section-sub">Built specifically for Melbourne small businesses. No enterprise fluff.</p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((s, i) => (
+        <div
+          class="service-card"
+          style={`--glow:${s.glow}; --accent:${s.accent}; animation-delay:${i*0.08}s`}
+          data-tilt
+        >
+          <div class="card-glow"></div>
+          <div class="card-inner">
+            <div class="s-icon">{s.icon}</div>
+            <h3 class="s-name">{s.name}</h3>
+            <p class="s-tagline">{s.tagline}</p>
+            <p class="s-desc">{s.desc}</p>
+            <ul class="s-usecases">
+              {s.usecases.map(u => (
+                <li><span class="check">✓</span> {u}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="card-shine"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.services {
+  position: relative;
+  padding: 7rem 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* Dot grid */
+.grid-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.container { position: relative; z-index: 1; }
+
+.section-head { text-align: center; margin-bottom: 3.5rem; }
+.section-sub { max-width: 480px; margin: 0 auto 0; }
+
+/* Cards */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  position: relative;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, border-color 0.3s, box-shadow 0.3s;
+  cursor: default;
+  will-change: transform;
+}
+
+.card-glow {
+  position: absolute; inset: 0;
+  background: var(--glow, rgba(0,212,106,0.1));
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 0;
+  border-radius: 16px;
+}
+.service-card:hover .card-glow { opacity: 1; }
+
+.card-shine {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+  border-radius: 16px;
+  pointer-events: none; z-index: 2;
+  opacity: 0; transition: opacity 0.3s;
+}
+.service-card:hover .card-shine { opacity: 1; }
+
+.card-inner {
+  position: relative; z-index: 1;
+  padding: 2rem 1.8rem;
+}
+
+.service-card:hover {
+  border-color: var(--accent, var(--green));
+  box-shadow: 0 0 0 1px var(--accent, var(--green)), 0 8px 32px rgba(0,0,0,0.1), 0 0 40px var(--glow, rgba(0,212,106,0.08));
+}
+
+.s-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+.s-name {
+  font-weight: 700; font-size: 1.12rem; color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.s-tagline {
+  font-size: 0.8rem; color: var(--accent, var(--green));
+  margin-bottom: 0.9rem; font-weight: 500;
+}
+.s-desc {
+  font-size: 0.86rem; color: var(--muted);
+  line-height: 1.65; margin-bottom: 1.2rem;
+}
+.s-usecases { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.s-usecases li { font-size: 0.8rem; color: var(--text); display: flex; gap: 0.5rem; align-items: baseline; }
+.check { color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+@media (max-width: 768px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .services { padding: 4rem 0; }
+  .services-grid { grid-template-columns: 1fr; }
+  .card-inner { padding: 1.5rem 1.3rem; }
+  .s-name { font-size: 1rem; }
+}
+</style>
+
+<script is:inline>
+(function () {
+  function init() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') { setTimeout(init, 80); return; }
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('.section-head', {
+      scrollTrigger: { trigger: '.services', start: 'top 82%' },
+      y: 30, opacity: 0, duration: 0.7, ease: 'power3.out',
+    });
+    gsap.from('.service-card', {
+      scrollTrigger: { trigger: '.services-grid', start: 'top 82%' },
+      y: 50, opacity: 0, rotateX: 15, duration: 0.7, stagger: 0.1,
+      ease: 'power3.out', transformOrigin: 'top center',
+    });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+
+  // 3D tilt
+  function tilt() {
+    document.querySelectorAll('[data-tilt]').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        el.style.transform = `perspective(800px) rotateY(${x*16}deg) rotateX(${-y*12}deg) translateZ(12px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', tilt) : tilt();
+})();
+</script>

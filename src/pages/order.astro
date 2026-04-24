@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Get Started — AussieAI" description="Sign up for AussieAI Tradie or NDIS package.">
+<style>
+  body { background: #080f1a; color: #fff; font-family: 'Inter', sans-serif; }
+  .order-wrap {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 4rem 1rem;
+  }
+  .order-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%; max-width: 520px;
+  }
+  .plan-pill {
+    display: inline-block;
+    background: rgba(0,212,106,0.15);
+    color: #00d46a;
+    border: 1px solid rgba(0,212,106,0.3);
+    border-radius: 99px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 0.3rem 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+  h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.4rem; }
+  .sub { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-bottom: 2rem; }
+  .form-field { margin-bottom: 1.1rem; }
+  label { display: block; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+  input, select, textarea {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 0.75rem 1rem;
+    color: #fff; font-size: 0.9rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: #00d46a; }
+  select option { background: #0d1b2a; }
+  textarea { resize: vertical; min-height: 80px; }
+  .submit-btn {
+    width: 100%; padding: 0.9rem;
+    background: #00d46a; color: #000;
+    font-weight: 800; font-size: 0.95rem;
+    border: none; border-radius: 10px;
+    cursor: pointer; margin-top: 0.5rem;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .submit-btn:hover { background: #00f07a; box-shadow: 0 6px 24px rgba(0,212,106,0.4); }
+  .note { font-size: 0.68rem; color: rgba(255,255,255,0.35); text-align: center; margin-top: 0.8rem; }
+  .success { display: none; text-align: center; padding: 2rem 0; }
+  .success h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .success p { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+</style>
+
+<div class="order-wrap">
+  <div class="order-card">
+    <div class="plan-pill" id="planPill">Loading...</div>
+    <h1>Let's get you set up</h1>
+    <p class="sub">Fill in your details — we'll have everything running within 48 hours.</p>
+
+    <form id="orderForm">
+      <input type="hidden" name="plan" id="planInput" />
+
+      <div class="form-field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" required placeholder="Dave Smith" />
+      </div>
+
+      <div class="form-field">
+        <label for="business">Business name</label>
+        <input type="text" id="business" name="business" required placeholder="Smith Electrical Pty Ltd" />
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Mobile number</label>
+        <input type="tel" id="phone" name="phone" required placeholder="0412 345 678" />
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="dave@smithelectrical.com.au" />
+      </div>
+
+      <div class="form-field">
+        <label for="state">State</label>
+        <select id="state" name="state" required>
+          <option value="">Select state</option>
+          <option>NSW</option>
+          <option>VIC</option>
+          <option>QLD</option>
+          <option>WA</option>
+          <option>SA</option>
+          <option>TAS</option>
+          <option>ACT</option>
+          <option>NT</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="notes">Anything else? (optional)</label>
+        <textarea id="notes" name="notes" placeholder="e.g. I do mostly residential electrical in Melbourne suburbs"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Get started →</button>
+      <p class="note">No credit card needed · 2-week free trial · Reply within 2 hours</p>
+    </form>
+
+    <div class="success" id="successMsg">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">✅</div>
+      <h2>You're on the list!</h2>
+      <p>We'll WhatsApp you within 2 hours to get everything set up.</p>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const STRIPE_LINKS = {
+    tradie: 'https://buy.stripe.com/dRm5kEguNax527F0kw5sA02',
+    ndis:   'https://buy.stripe.com/bJebJ2guN34D3bJ4AM5sA03',
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const plan = params.get('plan') || 'tradie';
+  document.getElementById('planInput').value = plan;
+  document.getElementById('planPill').textContent =
+    plan === 'ndis' ? 'NDIS Pack — $399 setup + $149.99/mo' : 'Tradie Pack — $69 setup + $39.99/mo';
+
+  document.getElementById('orderForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target));
+    // Fire n8n webhook (non-blocking)
+    fetch('https://n8n.aussieai.shop/webhook/order-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).catch(() => {});
+    // Redirect to Stripe checkout
+    const stripeUrl = new URL(STRIPE_LINKS[plan] || STRIPE_LINKS.tradie);
+    stripeUrl.searchParams.set('prefilled_email', data.email || '');
+    window.location.href = stripeUrl.toString();
+  });
+</script>
+</Base>

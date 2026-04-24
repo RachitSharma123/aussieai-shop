@@ -1,0 +1,318 @@
+---
+const steps = [
+  { num: '01', title: 'Free 20-min call', desc: 'We talk about your business, what takes up your time, and what you want automated. No tech knowledge needed.', icon: '📞' },
+  { num: '02', title: 'We build it for you', desc: 'Our team sets everything up in 48 hours. You don\'t touch a line of code. We handle the whole thing.', icon: '⚙️' },
+  { num: '03', title: 'You approve it', desc: 'We walk you through everything, make any tweaks, and only go live when you\'re happy.', icon: '✅' },
+  { num: '04', title: 'It runs itself', desc: 'Your AI works 24/7. We monitor it, keep it updated, and you can call anytime if something needs changing.', icon: '🚀' },
+];
+
+const faqs = [
+  { q: 'Do I need to know anything about AI or tech?', a: 'Not at all. We handle 100% of the setup and management. You just tell us what you need and we build it.' },
+  { q: 'How long does setup take?', a: 'Most setups are live within 48 hours of our first call. Complex builds might take up to a week.' },
+  { q: 'Can I cancel anytime?', a: 'Yes. No lock-in contracts. If you want to cancel, just let us know with 30 days notice and that\'s it.' },
+  { q: 'What if my customers don\'t like chatting with AI?', a: 'The AI always has an option to connect to a real person. It handles the simple stuff so you can focus on real conversations.' },
+  { q: 'Is my data safe?', a: 'Yes. We use Australian-compliant cloud infrastructure and never share your data with third parties.' },
+  { q: 'Can you work with my existing software?', a: 'Most likely yes. We integrate with booking systems, Google Calendar, Xero, MYOB, and most common tools.' },
+];
+---
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="grid-bg"></div>
+  <div class="container">
+    <div class="section-head">
+      <span class="section-tag">Process</span>
+      <h2 class="section-title">Up and running in <span class="serif-em">4 simple steps</span></h2>
+    </div>
+
+    <div class="steps-grid">
+      {steps.map((s, i) => (
+        <div class="step-card" data-tilt style={`animation-delay:${i*0.1}s`}>
+          <div class="step-glow"></div>
+          <div class="step-num mono">{s.num}</div>
+          <div class="step-icon">{s.icon}</div>
+          <h3 class="step-title">{s.title}</h3>
+          <p class="step-desc">{s.desc}</p>
+          {i < steps.length - 1 && <div class="step-connector"></div>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container faq-inner">
+    <div class="faq-left">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Common<br/>questions</h2>
+      <p class="section-sub">Still not sure? <a href="#contact" class="inline-link">Book a free call →</a></p>
+    </div>
+    <div class="faq-list">
+      {faqs.map((f, i) => (
+        <details class="faq-item" style={`animation-delay:${i*0.07}s`}>
+          <summary class="faq-q">{f.q}</summary>
+          <p class="faq-a">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="grid-bg"></div>
+  <div class="container contact-inner">
+    <div class="contact-left">
+      <span class="section-tag">Let's talk</span>
+      <h2 class="contact-title">
+        Book your free<br />
+        <span class="serif-em">20-minute call</span>
+      </h2>
+      <p class="contact-sub">
+        Tell us about your business. We'll show you exactly what we can automate and how much time it saves.
+      </p>
+      <div class="contact-details">
+        <div class="cd-item"><span class="cd-icon">📍</span><span>Melbourne, Victoria, Australia</span></div>
+        <div class="cd-item"><span class="cd-icon">✉️</span><span>hello@aussieai.shop</span></div>
+        <div class="cd-item"><span class="cd-icon">⏱</span><span>Reply within 2 hours (business hours)</span></div>
+      </div>
+    </div>
+
+    <form class="contact-form glass" action="https://formspree.io/f/mpqopryb" method="POST" data-tilt>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="Jane Smith" />
+        </div>
+        <div class="form-field">
+          <label for="biz">Business name</label>
+          <input type="text" id="biz" name="business" required placeholder="Smith's Cafe" />
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required placeholder="jane@smithscafe.com.au" />
+      </div>
+      <div class="form-field">
+        <label for="biztype">Type of business</label>
+        <select id="biztype" name="biztype">
+          <option value="cafe">Cafe / Restaurant / Food</option>
+          <option value="tradie">Tradie / Construction</option>
+          <option value="clinic">Clinic / Health / Allied Health</option>
+          <option value="retail">Retail / Shop</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="plan">Interested plan</label>
+        <select id="plan" name="plan">
+          <option value="starter">Starter — $99/mo</option>
+          <option value="growth" selected>Growth — $199/mo</option>
+          <option value="fullstack">Full Stack — $299/mo</option>
+          <option value="notsure">Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="msg">What takes up most of your time?</label>
+        <textarea id="msg" name="message" rows="4" placeholder="e.g. Answering WhatsApp questions, chasing invoices..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Book my free call →</button>
+      <p class="form-note mono">No credit card needed · Reply within 2 hours</p>
+    </form>
+  </div>
+</section>
+
+<style>
+/* ===== HOW ===== */
+.how {
+  position: relative;
+  padding: 7rem 0;
+  background: var(--bg3);
+  overflow: hidden;
+}
+.grid-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.container { position: relative; z-index: 1; }
+.section-head { text-align: center; margin-bottom: 3.5rem; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  position: relative;
+}
+
+.step-card {
+  position: relative;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px; padding: 2rem 1.5rem;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, border-color 0.3s, box-shadow 0.3s;
+  will-change: transform; overflow: hidden;
+}
+.step-glow {
+  position: absolute; inset: 0; border-radius: 16px;
+  background: radial-gradient(circle at 50% 0%, rgba(0,212,106,0.12), transparent 70%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.step-card:hover { border-color: rgba(0,184,94,0.5); box-shadow: 0 0 30px rgba(0,184,94,0.1), 0 8px 30px rgba(0,0,0,0.08); }
+.step-card:hover .step-glow { opacity: 1; }
+
+.step-num { font-size: 0.68rem; color: var(--green); letter-spacing: 0.12em; margin-bottom: 0.8rem; position: relative; z-index:1; }
+.step-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; position: relative; z-index:1; }
+.step-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 0.6rem; position: relative; z-index:1; }
+.step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; position: relative; z-index:1; }
+
+/* ===== FAQ ===== */
+.faq { padding: 7rem 0; background: var(--bg2); }
+.faq-inner { display: grid; grid-template-columns: 1fr 1.7fr; gap: 5rem; align-items: start; }
+.faq-left .section-sub { margin-bottom: 0; }
+
+.faq-list { display: flex; flex-direction: column; }
+.faq-item {
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  padding: 1.1rem 0;
+  transition: background 0.2s;
+}
+.faq-q {
+  font-weight: 600; font-size: 0.93rem; color: var(--text);
+  cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after { content: '+'; color: var(--green); font-size: 1.3rem; font-weight: 300; flex-shrink: 0; transition: transform 0.3s; }
+details[open] .faq-q::after { content: '−'; }
+.faq-a { font-size: 0.86rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.65; }
+
+/* ===== CONTACT ===== */
+.contact {
+  position: relative;
+  padding: 7rem 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+.contact-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
+.contact-title {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+  letter-spacing: -0.02em; color: var(--text); line-height: 1.1; margin-bottom: 1.2rem;
+}
+.contact-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.7; }
+.contact-details { display: flex; flex-direction: column; gap: 0.8rem; }
+.cd-item { display: flex; align-items: center; gap: 0.7rem; font-size: 0.86rem; color: var(--muted); }
+
+.contact-form {
+  border-radius: 18px;
+  padding: 2rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease;
+  will-change: transform;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-field label {
+  font-size: 0.7rem; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.07em;
+}
+.form-field input, .form-field select, .form-field textarea {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: var(--text);
+  font-family: var(--font-display); font-size: 0.9rem;
+  padding: 0.7rem 0.9rem; outline: none;
+  transition: border-color 0.2s; resize: vertical;
+  border-radius: 8px;
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(0,212,106,0.1);
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(90,114,144,0.5); }
+.form-field select option { background: #f6f9fc; color: var(--text); }
+
+.submit-btn {
+  background: var(--green); color: #000;
+  border: none; padding: 1rem; border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 0.95rem; font-weight: 800; cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 24px rgba(0,212,106,0.3);
+}
+.submit-btn:hover { background: #00f07a; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,106,0.5); }
+.form-note { font-size: 0.62rem; text-align: center; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .faq-inner, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .how, .faq-section, .contact-section { padding: 4rem 0; }
+  .step-card { padding: 1.5rem; }
+  .step-num { font-size: 2rem; }
+  .faq-head, .contact-head { font-size: 1.5rem; }
+  .faq-q { font-size: 0.9rem; }
+  .faq-a { font-size: 0.85rem; }
+  .submit-btn { font-size: 0.9rem; padding: 0.9rem; }
+  .contact-inner { gap: 2rem; }
+  input, textarea, select { font-size: 0.9rem; }
+}
+</style>
+
+<script is:inline>
+(function () {
+  function init() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') { setTimeout(init, 80); return; }
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Steps 3D flip-in
+    gsap.from('.step-card', {
+      scrollTrigger: { trigger: '.steps-grid', start: 'top 82%' },
+      y: 50, opacity: 0, rotateX: 20, duration: 0.7, stagger: 0.12,
+      ease: 'power3.out', transformOrigin: 'top center',
+    });
+
+    // FAQ
+    gsap.from('.faq-left', {
+      scrollTrigger: { trigger: '.faq', start: 'top 82%' },
+      x: -30, opacity: 0, duration: 0.7, ease: 'power3.out',
+    });
+    gsap.from('.faq-item', {
+      scrollTrigger: { trigger: '.faq-list', start: 'top 85%' },
+      y: 18, opacity: 0, duration: 0.5, stagger: 0.07, ease: 'power2.out',
+    });
+
+    // Contact
+    gsap.from('.contact-left', {
+      scrollTrigger: { trigger: '.contact-inner', start: 'top 82%' },
+      x: -40, opacity: 0, duration: 0.75, ease: 'power3.out',
+    });
+    gsap.from('.contact-form', {
+      scrollTrigger: { trigger: '.contact-inner', start: 'top 82%' },
+      x: 40, opacity: 0, duration: 0.75, ease: 'power3.out',
+    });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+
+  // 3D tilt on step cards + contact form
+  function tilt() {
+    document.querySelectorAll('[data-tilt]').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width  - 0.5;
+        const y = (e.clientY - r.top)  / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateY(${x*12}deg) rotateX(${-y*9}deg) translateZ(10px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', tilt) : tilt();
+})();
+</script>

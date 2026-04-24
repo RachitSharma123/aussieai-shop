@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aussieai.shop/sitemap-index.xml

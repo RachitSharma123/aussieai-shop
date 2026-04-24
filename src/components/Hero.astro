@@ -1,0 +1,664 @@
+---
+---
+<section class="hero" id="hero-section">
+  <!-- Shader canvas: aurora/mesh gradient background -->
+  <canvas id="hero-bg"></canvas>
+
+  <!-- 3D wireframe sphere canvas -->
+  <canvas id="hero-3d"></canvas>
+
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="mono">Melbourne-based · Available now</span>
+      </div>
+
+      <h1 class="hero-title">
+        Your business,<br />
+        running on <em class="gradient-text">autopilot.</em>
+      </h1>
+
+      <p class="hero-desc">
+        AI chatbots, automated workflows, and smart receptionists for
+        Melbourne cafes, tradies, and clinics. No tech skills needed.
+        No lock-in. Just results.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <span class="btn-shimmer"></span>
+          Book a free 20-min call
+        </a>
+        <a href="#pricing" class="btn-ghost">See pricing →</a>
+      </div>
+
+      <div class="hero-proof">
+        <div class="proof-item">
+          <span class="proof-num">48h</span>
+          <span class="proof-label">average setup</span>
+        </div>
+        <div class="proof-div"></div>
+        <div class="proof-item">
+          <span class="proof-num">24/7</span>
+          <span class="proof-label">always on</span>
+        </div>
+        <div class="proof-div"></div>
+        <div class="proof-item">
+          <span class="proof-num">$0</span>
+          <span class="proof-label">setup fee</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" id="heroVisual">
+      <div class="chat-mockup" id="chatMockup">
+        <div class="mockup-glow"></div>
+        <div class="chat-header">
+          <div class="chat-avatar">AI</div>
+          <div>
+            <div class="chat-name">AussieAI Assistant</div>
+            <div class="chat-status mono">● Online now</div>
+          </div>
+        </div>
+        <div class="chat-messages">
+          <div class="msg bot">
+            <div class="bubble">G'day! How can I help you today? 👋</div>
+            <div class="msg-time mono">9:01 AM</div>
+          </div>
+          <div class="msg user">
+            <div class="bubble">Any appointments available tomorrow?</div>
+            <div class="msg-time mono">9:02 AM</div>
+          </div>
+          <div class="msg bot">
+            <div class="bubble">Sure! 10:00 AM or 2:30 PM — which works?</div>
+            <div class="msg-time mono">9:02 AM</div>
+          </div>
+          <div class="msg user">
+            <div class="bubble">2:30 PM please</div>
+            <div class="msg-time mono">9:03 AM</div>
+          </div>
+          <div class="msg bot" id="typingMsg">
+            <div class="bubble typing-bubble">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input class="chat-input" placeholder="Type a message..." readonly />
+          <button class="chat-send">→</button>
+        </div>
+      </div>
+
+      <div class="float-card card-1">
+        <div class="fc-icon">📅</div>
+        <div><div class="fc-val">3 bookings</div><div class="fc-label mono">while you slept</div></div>
+      </div>
+      <div class="float-card card-2">
+        <div class="fc-icon">⚡</div>
+        <div><div class="fc-val">2.1s</div><div class="fc-label mono">avg response</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="works-with-bar">
+    <div class="container">
+      <p class="ww-label mono">What we work with</p>
+      <div class="ww-row">
+
+        <div class="ww-chip" style="--brand:#25D366;--brand-bg:rgba(37,211,102,0.1)">
+          <div class="ww-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </div>
+          <span>WhatsApp</span>
+        </div>
+
+        <div class="ww-chip" style="--brand:#2AABEE;--brand-bg:rgba(42,171,238,0.1)">
+          <div class="ww-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#2AABEE" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          <span>Telegram</span>
+        </div>
+
+        <div class="ww-chip" style="--brand:#E1306C;--brand-bg:rgba(225,48,108,0.08)">
+          <div class="ww-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><defs><linearGradient id="ig-g" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path fill="url(#ig-g)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </div>
+          <span>Instagram DM</span>
+        </div>
+
+        <div class="ww-chip" style="--brand:#0084FF;--brand-bg:rgba(0,132,255,0.08)">
+          <div class="ww-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="#0084FF" d="M12 0C5.373 0 0 4.975 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.627 0 12-4.975 12-11.111S18.627 0 12 0zm1.193 14.963l-3.056-3.259-5.963 3.259 6.559-6.963 3.13 3.259 5.889-3.259-6.559 6.963z"/></svg>
+          </div>
+          <span>Facebook Messenger</span>
+        </div>
+
+        <div class="ww-chip" style="--brand:#6366f1;--brand-bg:rgba(99,102,241,0.08)">
+          <div class="ww-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#6366f1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4" ry="10"/><path d="M2 12h20"/></svg>
+          </div>
+          <span>Your Website</span>
+        </div>
+
+        <div class="ww-chip" style="--brand:#D83B01;--brand-bg:rgba(216,59,1,0.08)">
+          <div class="ww-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20"><rect x="0"  y="0"  width="11" height="11" fill="#F25022"/><rect x="13" y="0"  width="11" height="11" fill="#7FBA00"/><rect x="0"  y="13" width="11" height="11" fill="#00A4EF"/><rect x="13" y="13" width="11" height="11" fill="#FFB900"/></svg>
+          </div>
+          <span>Microsoft 365</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===================== HERO LAYOUT ===================== */
+.hero {
+  position: relative;
+  padding: 8rem 0 0;
+  background: var(--bg);
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+#hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+#hero-3d {
+  position: absolute;
+  right: 5%; top: 10%;
+  width: 340px; height: 340px;
+  pointer-events: none; z-index: 0;
+  opacity: 0.18;
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+  padding-bottom: 5rem;
+}
+
+/* ===================== BADGE ===================== */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.1);
+  backdrop-filter: blur(12px);
+  padding: 0.4rem 1rem; margin-bottom: 1.5rem;
+  font-size: 0.75rem; color: var(--muted);
+  border-radius: 100px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #00d46a;
+  box-shadow: 0 0 8px #00d46a, 0 0 20px rgba(0,212,106,0.5);
+  animation: pulse-dot 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 6px #00d46a, 0 0 14px rgba(0,212,106,0.3); }
+  50%      { box-shadow: 0 0 10px #00d46a, 0 0 28px rgba(0,212,106,0.6); }
+}
+
+/* ===================== TYPOGRAPHY ===================== */
+.hero-title {
+  font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -0.03em; color: var(--text);
+  margin-bottom: 1.4rem;
+}
+.gradient-text {
+  font-family: var(--font-serif);
+  font-style: italic; font-weight: 400;
+  background: linear-gradient(135deg, #00d46a 0%, #00b8d9 40%, #00d46a 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: grad-shift 5s ease infinite;
+}
+@keyframes grad-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-desc {
+  font-size: 1.05rem; color: var(--muted);
+  max-width: 450px; margin-bottom: 2rem; line-height: 1.75;
+}
+
+/* ===================== BUTTONS ===================== */
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+.btn-primary {
+  display: inline-flex; align-items: center;
+  background: #00a846; color: #fff;
+  font-weight: 700; font-size: 0.9rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 4px;
+  transition: all 0.3s;
+  box-shadow: 0 0 0 0 rgba(0,168,70,0);
+  position: relative; overflow: hidden;
+}
+.btn-shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.btn-primary:hover .btn-shimmer { transform: translateX(100%); }
+.btn-primary:hover {
+  background: #00c454; transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0,196,84,0.45);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center;
+  border: 1.5px solid rgba(0,0,0,0.2);
+  color: var(--text);
+  font-weight: 600; font-size: 0.9rem;
+  padding: 0.9rem 1.6rem; border-radius: 4px;
+  transition: all 0.2s; backdrop-filter: blur(8px);
+}
+.btn-ghost:hover { border-color: #00d46a; color: #00d46a; }
+
+/* ===================== PROOF ===================== */
+.hero-proof { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.proof-num { font-size: 1.45rem; font-weight: 800; color: var(--text); display: block; }
+.proof-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); display: block; }
+.proof-div { width: 1px; height: 28px; background: rgba(0,0,0,0.1); }
+
+/* ===================== VISUAL / MOCKUP ===================== */
+.hero-visual {
+  position: relative; display: flex; justify-content: center;
+  z-index: 2;
+}
+
+.chat-mockup {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 18px; width: 310px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 4px 20px rgba(0,0,0,0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: visible;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+  will-change: transform;
+}
+.mockup-glow {
+  position: absolute; inset: -2px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(0,212,106,0.3), rgba(0,184,217,0.15), rgba(0,212,106,0.05));
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.chat-mockup:hover .mockup-glow { opacity: 1; }
+
+.chat-header {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  background: rgba(0,0,0,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  border-radius: 18px 18px 0 0;
+  color: var(--text);
+}
+.chat-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: linear-gradient(135deg, #00a846, #00d46a);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: #fff;
+  box-shadow: 0 0 16px rgba(0,212,106,0.5);
+}
+.chat-name { font-weight: 600; font-size: 0.86rem; color: var(--text); }
+.chat-status { font-size: 0.62rem; color: #00d46a; margin-top: 1px; }
+
+.chat-messages {
+  padding: 1rem; display: flex; flex-direction: column;
+  gap: 0.75rem; min-height: 200px;
+  background: rgba(0,0,0,0.02);
+}
+.msg { display: flex; flex-direction: column; gap: 0.2rem; }
+.msg.user { align-items: flex-end; }
+.bubble {
+  padding: 0.55rem 0.85rem; border-radius: 12px;
+  font-size: 0.8rem; max-width: 88%; line-height: 1.45; color: var(--text);
+}
+.msg.bot .bubble {
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 4px 12px 12px 12px;
+}
+.msg.user .bubble {
+  background: linear-gradient(135deg, #00a846, #008038);
+  border-radius: 12px 4px 12px 12px;
+  color: #fff !important;
+}
+.msg-time { font-size: 0.58rem; color: var(--muted); }
+
+.typing-bubble {
+  display: flex; align-items: center; gap: 4px;
+  min-width: 52px; justify-content: center;
+}
+.dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  animation: dot-bounce 1.2s ease-in-out infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-bounce { 0%,80%,100% { transform: scale(0.7); opacity:0.4; } 40% { transform: scale(1); opacity:1; } }
+
+.chat-input-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  background: rgba(0,0,0,0.03);
+  border-radius: 0 0 18px 18px;
+}
+.chat-input {
+  flex: 1; border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.78rem; color: var(--muted);
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px; outline: none;
+}
+.chat-send {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #00a846; color: #fff; border: none;
+  cursor: pointer; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ===================== FLOAT CARDS ===================== */
+.float-card {
+  position: absolute;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.1);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex; align-items: center; gap: 0.65rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  white-space: nowrap; color: var(--text);
+}
+.card-1 { bottom: 30px; left: -35px; }
+.card-2 { top: 30px; right: -35px; }
+.fc-icon { font-size: 1.3rem; }
+.fc-val { font-weight: 700; font-size: 0.88rem; color: var(--text); }
+.fc-label { font-size: 0.62rem; color: rgba(255,255,255,0.5); }
+
+/* ===================== WORKS WITH ===================== */
+.works-with-bar {
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.8rem 0 2rem;
+}
+.ww-label {
+  font-size: 0.62rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.14em;
+  text-align: center; margin-bottom: 1.3rem; display: block;
+}
+.ww-row {
+  display: flex; gap: 0.65rem; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+}
+.ww-chip {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.48rem 1rem 0.48rem 0.55rem;
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.09);
+  border-radius: 100px;
+  transition: all 0.28s cubic-bezier(.34,1.56,.64,1);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+  position: relative; overflow: hidden; cursor: default;
+}
+.ww-chip::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--brand-bg, rgba(0,0,0,0.04));
+  opacity: 0; transition: opacity 0.25s;
+  border-radius: inherit;
+}
+.ww-chip:hover {
+  border-color: var(--brand, var(--green));
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1), 0 0 0 1px var(--brand, var(--green));
+}
+.ww-chip:hover::before { opacity: 1; }
+.ww-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--brand-bg, rgba(0,0,0,0.04));
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; z-index: 1;
+  transition: transform 0.28s cubic-bezier(.34,1.56,.64,1);
+}
+.ww-chip:hover .ww-icon { transform: scale(1.15) rotate(-8deg); }
+.ww-chip span {
+  font-size: 0.74rem; font-weight: 600; color: #2d4a6a;
+  white-space: nowrap; position: relative; z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .ww-row { gap: 0.45rem; }
+  .ww-chip { padding: 0.38rem 0.7rem 0.38rem 0.45rem; }
+  .ww-chip span { font-size: 0.66rem; }
+  .ww-icon { width: 24px; height: 24px; }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; padding-bottom: 3rem; }
+  .hero-visual { display: none; }
+  #hero-3d { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 5.5rem 0 0; min-height: auto; }
+  .hero-inner { gap: 2rem; padding-bottom: 2.5rem; }
+  .hero-badge { font-size: 0.68rem; padding: 0.35rem 0.8rem; }
+  .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); margin-bottom: 1rem; }
+  .hero-desc { font-size: 0.93rem; margin-bottom: 1.5rem; }
+  .hero-actions { gap: 0.75rem; flex-direction: column; }
+  .btn-primary, .btn-ghost { font-size: 0.84rem; padding: 0.8rem 1.2rem; width: 100%; justify-content: center; }
+  .hero-proof { gap: 1rem; }
+  .proof-num { font-size: 1.2rem; }
+  .trust-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .trust-logos { gap: 0.5rem; }
+  .trust-logos span { font-size: 0.7rem; padding: 0.15rem 0.55rem; }
+}
+</style>
+
+<!-- ========== AURORA SHADER BACKGROUND ========== -->
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js';
+
+const canvas = document.getElementById('hero-bg');
+if (!canvas) return;
+
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: false });
+renderer.setPixelRatio(1); // keep cheap
+
+const scene  = new THREE.Scene();
+const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+const vert = `
+  varying vec2 vUv;
+  void main() { vUv = uv; gl_Position = vec4(position, 1.0); }
+`;
+
+const frag = `
+  precision mediump float;
+  uniform float uTime;
+  uniform vec2  uMouse;
+  varying vec2  vUv;
+
+  // 2D simplex noise — by Ian McEwan / ashima
+  vec3 mod289v(vec3 x){return x-floor(x*(1./289.))*289.;}
+  vec2 mod289v(vec2 x){return x-floor(x*(1./289.))*289.;}
+  vec3 permute(vec3 x){return mod289v(((x*34.)+1.)*x);}
+  float snoise(vec2 v){
+    const vec4 C=vec4(.211324865405187,.366025403784439,-.577350269189626,.024390243902439);
+    vec2 i=floor(v+dot(v,C.yy));
+    vec2 x0=v-i+dot(i,C.xx);
+    vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);
+    vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1;
+    i=mod289v(i);
+    vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+    vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+    m=m*m; m=m*m;
+    vec3 x=2.*fract(p*C.www)-1.;
+    vec3 h=abs(x)-.5;
+    vec3 ox=floor(x+.5);
+    vec3 a0=x-ox;
+    m*=1.79284291400159-.85373472095314*(a0*a0+h*h);
+    vec3 g;
+    g.x=a0.x*x0.x+h.x*x0.y;
+    g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+    return 130.*dot(m,g);
+  }
+
+  void main(){
+    vec2 uv = vUv;
+    vec2 m  = uMouse * .18;
+    float t = uTime  * .10;
+
+    float n1 = snoise(uv * 1.6 + vec2(t,       t*.65)  + m);
+    float n2 = snoise(uv * 3.0 - vec2(t*.55,   0.)     + m*.5);
+    float n3 = snoise(uv * 5.5 + vec2(t*.25,  -t*.4));
+    float n  = n1*.55 + n2*.30 + n3*.15;
+
+    // Light pastel aurora color stops
+    vec3 cBase  = vec3(.960, .978, .992);  // near-white
+    vec3 cMint  = vec3(.810, .960, .900);  // soft mint
+    vec3 cSky   = vec3(.800, .935, .975);  // soft sky blue
+    vec3 cVivid = vec3(.760, .965, .870);  // bright mint-green
+
+    vec3 col = mix(cBase, cMint,  smoothstep(-.5, .1, n));
+    col      = mix(col,   cSky,   smoothstep(-.1, .4, n)*.50);
+    col      = mix(col,   cVivid, smoothstep( .4, .9, n)*.35);
+
+    // Very subtle vignette for depth
+    float vig = 1. - length((uv-.5)*1.3);
+    vig = smoothstep(.0, .9, vig);
+    col = mix(vec3(.955,.975,.992), col, .35 + vig*.65);
+
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+const uniforms = {
+  uTime:  { value: 0.0 },
+  uMouse: { value: new THREE.Vector2(0, 0) },
+};
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({ vertexShader: vert, fragmentShader: frag, uniforms })));
+
+let targetMouse = new THREE.Vector2();
+document.addEventListener('mousemove', e => {
+  targetMouse.set((e.clientX/innerWidth)*2-1, -(e.clientY/innerHeight)*2+1);
+});
+
+const resize = () => {
+  const h = document.getElementById('hero-section')?.offsetHeight || innerHeight;
+  renderer.setSize(innerWidth, h);
+};
+resize();
+window.addEventListener('resize', resize);
+
+const clock = new THREE.Clock();
+(function tick() {
+  requestAnimationFrame(tick);
+  uniforms.uTime.value  = clock.getElapsedTime();
+  uniforms.uMouse.value.lerp(targetMouse, .04);
+  renderer.render(scene, camera);
+})();
+</script>
+
+<!-- ========== WIREFRAME SPHERE ========== -->
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js';
+
+const canvas = document.getElementById('hero-3d');
+if (!canvas) return;
+
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(340, 340);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+camera.position.z = 4.5;
+
+// Torus knot wireframe
+const geo  = new THREE.TorusKnotGeometry(1.2, 0.38, 128, 16);
+const mat  = new THREE.MeshBasicMaterial({ color: 0x00d46a, wireframe: true });
+const mesh = new THREE.Mesh(geo, mat);
+scene.add(mesh);
+
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = (e.clientX / innerWidth - .5) * 2;
+  my = -(e.clientY / innerHeight - .5) * 2;
+});
+
+const clock = new THREE.Clock();
+(function tick() {
+  requestAnimationFrame(tick);
+  const t = clock.getElapsedTime();
+  mesh.rotation.x = t * .25 + my * .3;
+  mesh.rotation.y = t * .35 + mx * .3;
+  renderer.render(scene, camera);
+})();
+</script>
+
+<!-- ========== GSAP + TILT + CHAT ========== -->
+<script is:inline>
+(function () {
+  function init() {
+    if (typeof gsap === 'undefined') { setTimeout(init, 80); return; }
+
+    // Reveal content
+    gsap.from('.hero-badge, .hero-title, .hero-desc, .hero-actions, .hero-proof', {
+      opacity: 0, y: 32, duration: 0.9, stagger: 0.13, ease: 'power3.out', delay: 0.3,
+    });
+
+    // Float cards
+    gsap.to('.float-card', {
+      y: -16, duration: 3.5, yoyo: true, repeat: -1,
+      ease: 'sine.inOut', stagger: 1.0,
+    });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+
+  // 3D tilt on chat mockup
+  const visual = document.getElementById('heroVisual');
+  const mockup = document.getElementById('chatMockup');
+  if (visual && mockup) {
+    visual.addEventListener('mousemove', e => {
+      const r = mockup.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width  - .5) * 2;
+      const y = ((e.clientY - r.top)  / r.height - .5) * 2;
+      mockup.style.transform = `perspective(900px) rotateY(${x*14}deg) rotateX(${-y*10}deg) translateZ(14px)`;
+    });
+    visual.addEventListener('mouseleave', () => { mockup.style.transform = ''; });
+  }
+
+  // Bot reply
+  setTimeout(() => {
+    const t = document.getElementById('typingMsg');
+    if (t) t.innerHTML = '<div class="bubble">Done! Booked for 2:30 PM tomorrow. I\'ll send a reminder 1 hour before. Anything else? 😊</div><div class="msg-time mono">9:03 AM</div>';
+  }, 3000);
+})();
+</script>

@@ -1,0 +1,83 @@
+---
+---
+<nav class="nav" id="mainNav">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo">
+      <span class="logo-icon">🦘</span>
+      <span>Aussie<span class="green">AI</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Get started</a>
+    </div>
+    <button class="nav-toggle" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="ml">Services</a>
+  <a href="#pricing" class="ml">Pricing</a>
+  <a href="#how" class="ml">How it works</a>
+  <a href="#faq" class="ml">FAQ</a>
+  <a href="#contact" class="ml cta">Get started</a>
+</div>
+
+<style>
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 0;
+  background: rgba(248,250,252,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  transition: all 0.3s;
+}
+.nav.scrolled {
+  background: rgba(248,250,252,0.96);
+  border-bottom-color: rgba(0,184,94,0.2);
+  box-shadow: 0 1px 24px rgba(0,0,0,0.1);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.logo-icon { font-size: 1.2rem; }
+.green { color: var(--green); }
+.nav-links { display: flex; align-items: center; gap: 2rem; font-size: 0.86rem; font-weight: 500; }
+.nav-links a { color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--green2) !important; color: #fff !important;
+  padding: 0.5rem 1.2rem; border-radius: 4px;
+  font-weight: 600 !important; transition: all 0.2s !important;
+  color: rgba(255,255,255,0.9) !important;
+}
+.nav-cta:hover { background: var(--green) !important; box-shadow: 0 0 20px rgba(0,212,106,0.4) !important; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: rgba(15,23,42,0.6); border-radius: 2px; transition: all 0.3s; }
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: rgba(248,250,252,0.98); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.ml { font-size: 1.8rem; font-weight: 800; color: var(--muted); transition: color 0.2s; }
+.ml:hover, .ml.cta { color: var(--green); }
+@media (max-width: 768px) { .nav-links { display: none; } .nav-toggle { display: flex; } }
+</style>
+
+<script is:inline>
+const nav    = document.getElementById('mainNav');
+const toggle = document.getElementById('navToggle');
+const menu   = document.getElementById('mobileMenu');
+window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', scrollY > 30));
+toggle?.addEventListener('click', () => menu?.classList.toggle('open'));
+document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => menu?.classList.remove('open')));
+</script>
