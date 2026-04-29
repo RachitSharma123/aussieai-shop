@@ -11,7 +11,7 @@ const localBusiness = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "AussieAI",
-  "description": "AI chatbots, workflow automation, and AI receptionists for Melbourne small businesses including tradies and NDIS providers.",
+  "description": "AI chatbots, workflow automation, missed-call text-back, Google review boosting, and AI receptionists for Melbourne small businesses including tradies, cafes, clinics, and NDIS providers.",
   "url": "https://aussieai.shop",
   "email": "hello@aussieai.shop",
   "areaServed": {
@@ -36,7 +36,7 @@ const localBusiness = {
         "itemOffered": {
           "@type": "Service",
           "name": "Tradie AI Pack",
-          "description": "AI phone answering, WhatsApp agents and quote automation for Melbourne tradies."
+          "description": "AI phone answering, missed-call text-back, WhatsApp agents and quote automation for Melbourne tradies."
         },
         "price": "40",
         "priceCurrency": "AUD",
@@ -52,13 +52,45 @@ const localBusiness = {
         "itemOffered": {
           "@type": "Service",
           "name": "NDIS Provider AI Pack",
-          "description": "AI enquiry agent and participant intake automation for NDIS providers in Victoria."
+          "description": "AI enquiry agent, participant intake automation, and NDIS progress note generator for disability providers in Victoria."
         },
         "price": "150",
         "priceCurrency": "AUD",
         "priceSpecification": {
           "@type": "UnitPriceSpecification",
           "price": "150",
+          "priceCurrency": "AUD",
+          "unitText": "month"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Cafe Booking & DM Bot",
+          "description": "AI chatbot for Melbourne cafes that handles Instagram DMs, Facebook messages, and WhatsApp — answering questions and capturing table bookings automatically."
+        },
+        "price": "250",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "79",
+          "priceCurrency": "AUD",
+          "unitText": "month"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Google Review Booster",
+          "description": "Automated SMS review requests after every job or visit, plus AI-drafted replies to all Google reviews for Melbourne small businesses."
+        },
+        "price": "49",
+        "priceCurrency": "AUD",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "49",
           "priceCurrency": "AUD",
           "unitText": "month"
         }
