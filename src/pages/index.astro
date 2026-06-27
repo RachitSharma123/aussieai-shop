@@ -1,172 +1,61 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Pricing from '../components/Pricing.astro';
-import HowFaqContact from '../components/HowFaqContact.astro';
 import Footer from '../components/Footer.astro';
-
-const localBusiness = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "AussieAI",
-  "description": "AI chatbots, workflow automation, missed-call text-back, Google review boosting, and AI receptionists for Melbourne small businesses including tradies, cafes, clinics, and NDIS providers.",
-  "url": "https://aussieai.shop",
-  "email": "hello@aussieai.shop",
-  "areaServed": {
-    "@type": "City",
-    "name": "Melbourne",
-    "sameAs": "https://www.wikidata.org/wiki/Q3141"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Melbourne",
-    "addressRegion": "VIC",
-    "addressCountry": "AU"
-  },
-  "openingHours": "Mo-Su 00:00-24:00",
-  "priceRange": "$$",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "AI Automation Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Tradie AI Pack",
-          "description": "AI phone answering, missed-call text-back, WhatsApp agents and quote automation for Melbourne tradies."
-        },
-        "price": "40",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "40",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "NDIS Provider AI Pack",
-          "description": "AI enquiry agent, participant intake automation, and NDIS progress note generator for disability providers in Victoria."
-        },
-        "price": "150",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "150",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Cafe Booking & DM Bot",
-          "description": "AI chatbot for Melbourne cafes that handles Instagram DMs, Facebook messages, and WhatsApp — answering questions and capturing table bookings automatically."
-        },
-        "price": "250",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "79",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Google Review Booster",
-          "description": "Automated SMS review requests after every job or visit, plus AI-drafted replies to all Google reviews for Melbourne small businesses."
-        },
-        "price": "49",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "49",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      }
-    ]
-  }
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Do I need to know anything about AI or tech?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Not at all. We handle 100% of the setup and management. You just tell us what you need and we build it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does setup take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most setups are live within 48 hours of our first call. Complex builds might take up to a week."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel anytime?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. No lock-in contracts. If you want to cancel, just let us know with 30 days notice and that's it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if my customers don't like chatting with AI?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The AI always has an option to connect to a real person. It handles the simple stuff so you can focus on real conversations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is my data safe?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We use Australian-compliant cloud infrastructure and never share your data with third parties."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can you work with my existing software?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most likely yes. We integrate with booking systems, Google Calendar, Xero, MYOB, and most common tools."
-      }
-    }
-  ]
-};
+import { services, industries, processSteps, dashboard } from '../data/site';
+const topServices = services.slice(0, 4);
+const topIndustries = industries.slice(0, 6);
+const schema = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: 'Aussie AI', url: 'https://aussieai.shop', description: 'Custom AI agents and automation systems for Australian businesses.', address: { '@type': 'PostalAddress', addressLocality: 'Melbourne', addressRegion: 'VIC', addressCountry: 'AU' }, areaServed: 'Australia' };
 ---
-
 <Base>
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  </Fragment>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /></Fragment>
   <Nav />
-  <main>
-    <Hero />
-    <Services />
-    <Pricing />
-    <HowFaqContact />
+  <main id="top">
+    <section class="hero section ambient-section">
+      <div class="ambient-orb orb-one"></div><div class="ambient-orb orb-two"></div><div class="ambient-grid"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Melbourne based, built for Australian businesses</p>
+          <h1>Scale Your Operations Without Scaling Your Team</h1>
+          <p class="lead">Aussie AI builds custom AI agents and automation systems that handle enquiries, missed calls, bookings, inboxes, follow ups and repetitive admin, built around the tools your business already uses.</p>
+          <div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a><a class="btn secondary" href="/services">See What We Build</a></div>
+          <div class="trust" aria-label="Trust points">{['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No technical knowledge required', 'Start small, scale later', 'Human handoff included'].map((t) => <span>{t}</span>)}</div>
+        </div>
+        <div class="dashboard-wrap reveal" data-parallax>
+          <div class="dashboard">
+            <div class="dash-top"><span></span><b>AI operations dashboard</b><em>Live workflow</em></div>
+            {dashboard.map(([d, detail], i) => <button class="dash-row" type="button" style={`--i:${i}`} data-dashboard-row data-detail={detail}><span class="pulse"></span><strong>{d}</strong><small>{i % 2 ? 'Reviewed' : 'Automated'}</small></button>)}
+            <div class="dash-insight" id="dashboardInsight">Select a workflow to see how it supports your team.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container section-head reveal"><p class="eyebrow">What Aussie AI does</p><h2>Practical AI agents for everyday operations.</h2><p class="section-copy">Start with one useful automation, then expand when the workflow proves value.</p></div>
+      <div class="container bento four">{topServices.map((item) => <article class="card reveal"><h3>{item.title}</h3><p>{item.does}</p><a href="/services">View services</a></article>)}</div>
+    </section>
+
+    <section class="section">
+      <div class="container section-head reveal"><p class="eyebrow">Industries</p><h2>Built for the businesses Australia actually runs on.</h2></div>
+      <div class="container bento three">{topIndustries.map((item) => <article class="card reveal"><h3>{item.title}</h3><p>{item.problem}</p><a href="/industries">Explore industries</a></article>)}</div>
+    </section>
+
+    <section class="section">
+      <div class="container section-head reveal"><p class="eyebrow">Process</p><h2>Simple process. No tech overwhelm.</h2></div>
+      <div class="container steps preview-steps">{processSteps.slice(0, 3).map((step, i) => <article class="card step reveal"><span>Step {i + 1}</span><h3>{step.title}</h3><p>{step.happens}</p></article>)}</div>
+      <div class="container centre-actions"><a class="btn secondary" href="/process">See the full process</a></div>
+    </section>
+
+    <section class="section audit"><div class="container narrow reveal"><p class="eyebrow">Free audit first</p><h2>Every workflow is different.</h2><p>Some businesses need one simple automation. Others need a complete AI operations system across calls, inboxes, CRM, bookings and reporting. Aussie AI starts with a free audit so we can recommend the simplest solution that actually makes sense.</p><a class="btn primary" href="/contact">Book Free AI Audit</a></div></section>
+
+    <section class="section final-cta"><div class="container narrow reveal"><h2>Ready to see what AI can automate in your business?</h2><p>Book a free AI audit and we will show you where Aussie AI can help you respond faster, capture more leads and reduce manual work.</p><a class="btn primary" href="/contact">Book Free AI Audit</a></div></section>
   </main>
   <Footer />
-  <script src="/widget.js" defer></script>
+  <script is:inline>
+    const dashboard = document.querySelector('[data-parallax]');
+    window.addEventListener('scroll', () => { if (!dashboard || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; dashboard.style.setProperty('--lift', `${Math.min(window.scrollY * 0.018, 16)}px`); }, { passive: true });
+    const insight = document.getElementById('dashboardInsight');
+    document.querySelectorAll('[data-dashboard-row]').forEach((row) => row.addEventListener('click', () => { document.querySelectorAll('[data-dashboard-row]').forEach((item) => item.classList.remove('active')); row.classList.add('active'); if (insight) insight.textContent = row.dataset.detail || ''; }));
+  </script>
 </Base>

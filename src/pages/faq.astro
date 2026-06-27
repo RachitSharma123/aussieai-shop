@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { faqs } from '../data/site';
+---
+<Base title="FAQ: Aussie AI" description="Answers to common questions about Aussie AI agents and automation systems.">
+  <Nav />
+  <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">FAQ</p><h1>Common questions.</h1><p class="lead">Short, practical answers before we talk through your workflow.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container faq-list reveal">{faqs.map(([q, a]) => <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>)}</div></section></main>
+  <Footer />
+</Base>
