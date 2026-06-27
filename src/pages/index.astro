@@ -1,172 +1,302 @@
 ---
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Services from '../components/Services.astro';
-import Pricing from '../components/Pricing.astro';
-import HowFaqContact from '../components/HowFaqContact.astro';
 import Footer from '../components/Footer.astro';
 
-const localBusiness = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "AussieAI",
-  "description": "AI chatbots, workflow automation, missed-call text-back, Google review boosting, and AI receptionists for Melbourne small businesses including tradies, cafes, clinics, and NDIS providers.",
-  "url": "https://aussieai.shop",
-  "email": "hello@aussieai.shop",
-  "areaServed": {
-    "@type": "City",
-    "name": "Melbourne",
-    "sameAs": "https://www.wikidata.org/wiki/Q3141"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Melbourne",
-    "addressRegion": "VIC",
-    "addressCountry": "AU"
-  },
-  "openingHours": "Mo-Su 00:00-24:00",
-  "priceRange": "$$",
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "AI Automation Services",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Tradie AI Pack",
-          "description": "AI phone answering, missed-call text-back, WhatsApp agents and quote automation for Melbourne tradies."
-        },
-        "price": "40",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "40",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "NDIS Provider AI Pack",
-          "description": "AI enquiry agent, participant intake automation, and NDIS progress note generator for disability providers in Victoria."
-        },
-        "price": "150",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "150",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Cafe Booking & DM Bot",
-          "description": "AI chatbot for Melbourne cafes that handles Instagram DMs, Facebook messages, and WhatsApp — answering questions and capturing table bookings automatically."
-        },
-        "price": "250",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "79",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Google Review Booster",
-          "description": "Automated SMS review requests after every job or visit, plus AI-drafted replies to all Google reviews for Melbourne small businesses."
-        },
-        "price": "49",
-        "priceCurrency": "AUD",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "49",
-          "priceCurrency": "AUD",
-          "unitText": "month"
-        }
-      }
-    ]
-  }
-};
+const services = [
+  ['AI Chat Agents', 'Answer website and message enquiries, qualify leads, collect details and book appointments.'],
+  ['AI Voice Agents', 'Answer calls, handle missed call follow up, capture caller details and route urgent requests to humans.'],
+  ['Inbox Agents', 'Sort emails, summarise threads, draft replies, flag urgent messages and keep communication moving.'],
+  ['Workflow Automation', 'Connect your tools so leads, bookings, forms, emails, spreadsheets, CRMs and alerts update automatically.'],
+  ['AI Receptionist', 'Answer common questions, capture details, book appointments and send the right conversations to your team.'],
+  ['Missed Call Text Back', 'Text missed callers, collect job details and help recover leads before they contact someone else.'],
+  ['Google Review Booster', 'Request reviews, monitor feedback and draft professional replies for Google Business reviews.'],
+  ['NDIS Progress Note Assistant', 'Turn rough support notes into cleaner draft notes that are easier to review and organise.'],
+  ['CRM and Tool Integrations', 'Connect forms, calendars, inboxes, spreadsheets, CRMs, alerts and reporting tools.'],
+  ['Custom Website and AI Automation', 'Build modern websites with AI chat, smart forms, booking flows, lead capture and automation built in.'],
+];
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Do I need to know anything about AI or tech?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Not at all. We handle 100% of the setup and management. You just tell us what you need and we build it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long does setup take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most setups are live within 48 hours of our first call. Complex builds might take up to a week."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel anytime?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. No lock-in contracts. If you want to cancel, just let us know with 30 days notice and that's it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if my customers don't like chatting with AI?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The AI always has an option to connect to a real person. It handles the simple stuff so you can focus on real conversations."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is my data safe?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. We use Australian-compliant cloud infrastructure and never share your data with third parties."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can you work with my existing software?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most likely yes. We integrate with booking systems, Google Calendar, Xero, MYOB, and most common tools."
-      }
-    }
-  ]
+const without = [
+  'Leads wait too long for replies',
+  'Calls get missed during busy hours',
+  'After hours enquiries go cold',
+  'Staff answer the same questions daily',
+  'CRM updates are forgotten',
+  'Emails pile up',
+  'Admin slows down growth',
+];
+
+const withAi = [
+  'Leads get fast responses',
+  'Missed calls trigger automatic follow up',
+  'Common questions are answered around the clock',
+  'Customer details are captured cleanly',
+  'CRMs and spreadsheets update automatically',
+  'Staff receive clear summaries',
+  'More work gets handled without more hiring',
+];
+
+const solutions = [
+  ['Lead Response Automation', 'Respond to website forms, missed calls, social messages and customer enquiries quickly.'],
+  ['AI Receptionist', 'A front desk system that answers questions, captures details, books appointments and routes important conversations.'],
+  ['Missed Call Text Back', 'Text missed callers, collect job details and recover leads before they contact a competitor.'],
+  ['Google Review Booster', 'Request reviews, monitor feedback and draft professional replies for Google Business reviews.'],
+  ['Cafe Booking and DM Bot', 'Handle Instagram, Facebook, WhatsApp, menu questions, opening hours and booking enquiries.'],
+  ['NDIS Progress Note Assistant', 'Turn rough support notes into cleaner draft notes that are easier to review and organise.'],
+  ['CRM and Workflow Automation', 'Connect forms, emails, calendars, CRMs, spreadsheets, invoices, alerts and internal systems.'],
+  ['Custom Website and AI Automation', 'Build modern websites with AI chat, smart forms, booking flows, lead capture and automation built in.'],
+];
+
+const industries = [
+  ['Tradies', 'Capture missed calls while the team is on site, qualify job requests and keep follow up moving.'],
+  ['Cafes and restaurants', 'Reply to messages after hours, answer menu questions and organise booking enquiries.'],
+  ['NDIS providers', 'Organise enquiries, intake details, admin notes, reminders and cleaner staff handovers.'],
+  ['Clinics and allied health', 'Handle repeated enquiries, appointment requests, intake forms and reception admin.'],
+  ['Retail and local shops', 'Answer stock, hours, product, returns and delivery questions across web, email and messages.'],
+  ['Real estate', 'Capture buyer, renter and vendor enquiries, qualify leads and keep inspections organised.'],
+  ['Consultants', 'Triage enquiries, book calls, collect briefs and keep follow up consistent.'],
+  ['Agencies', 'Automate lead intake, reporting reminders, client updates and internal admin.'],
+  ['Service businesses', 'Respond faster, capture enquiries, update systems and give staff cleaner daily handovers.'],
+];
+
+const outcomes = [
+  'Faster lead response',
+  'Fewer missed enquiries',
+  'Less repetitive admin',
+  'More after hours opportunities captured',
+  'Cleaner staff handover',
+  'Better follow up',
+  'Smoother customer experience',
+];
+
+const steps = [
+  ['Audit', 'We review your current workflow, tools, repetitive tasks and missed opportunities.'],
+  ['Automation Map', 'We show what should be automated, what should stay human and where the biggest value is.'],
+  ['Build', 'We design, build, test and connect the AI agent or workflow into your existing systems.'],
+  ['Launch', 'We launch the system and make sure your team knows how to use it.'],
+  ['Improve', 'We monitor, refine and improve the automation as your business grows.'],
+];
+
+const toolCategories = [
+  'Websites',
+  'Forms',
+  'Email',
+  'Calendars',
+  'CRMs',
+  'Spreadsheets',
+  'Messaging',
+  'Payments',
+  'Reporting',
+  'Custom APIs',
+];
+
+const toolList = 'Websites, forms, Google Sheets, Airtable, Google Calendar, Gmail, Outlook, WhatsApp, SMS, Instagram, Facebook, HubSpot, GoHighLevel, Zapier, Make, n8n, Stripe, Xero, QuickBooks, databases, dashboards and custom APIs.';
+
+const faqs = [
+  ['What does Aussie AI actually build?', 'Custom AI agents and automations for enquiries, calls, inboxes, bookings, CRM updates, reporting, reviews and admin workflows.'],
+  ['Is this just a chatbot?', 'No. Chat can be one part of the system. The main value is connecting conversations to your tools and workflows.'],
+  ['What is an AI agent?', 'An AI agent is a practical assistant that can collect details, follow rules, trigger workflows and hand over when needed.'],
+  ['Can it answer calls?', 'Yes. Voice agents can answer calls, collect details, book appointments and escalate important matters.'],
+  ['Can it work with my current website?', 'Usually, yes. We can add agents, smart forms, booking flows and lead capture to most modern websites.'],
+  ['Can it connect with my CRM or calendar?', 'Yes. We commonly connect calendars, CRMs, forms, spreadsheets, inboxes, SMS and workflow tools.'],
+  ['Do I need technical knowledge?', 'No. We handle the strategy, build, testing, launch and support in plain language.'],
+  ['Will this replace my staff?', 'No. The goal is to reduce repetitive admin and missed enquiries, while keeping people in control.'],
+  ['What happens if the AI gets something wrong?', 'We add guardrails, approval steps, escalation paths and monitoring for important decisions.'],
+  ['Can we start with one small automation?', 'Yes. Many businesses start with one useful workflow, then expand once it proves value.'],
+  ['Do you maintain the system after launch?', 'Yes. Support, monitoring, refinements and improvements can be included after launch.'],
+  ['How do we get started?', 'Book a free AI audit. We will review your workflow and show the simplest path forward.'],
+];
+
+const dashboard = [
+  'New lead captured',
+  'Missed call followed up',
+  'Website enquiry qualified',
+  'Inbox reply drafted',
+  'CRM updated',
+  'Booking added to calendar',
+  'Google review reply drafted',
+  'Workflow completed',
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Aussie AI',
+  url: 'https://aussieai.shop',
+  description: 'Custom AI agents and automation systems for Australian businesses.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Melbourne',
+    addressRegion: 'VIC',
+    addressCountry: 'AU',
+  },
+  areaServed: 'Australia',
 };
 ---
-
 <Base>
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  </Fragment>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /></Fragment>
   <Nav />
-  <main>
-    <Hero />
-    <Services />
-    <Pricing />
-    <HowFaqContact />
+  <main id="top">
+    <section class="hero section ambient-section">
+      <div class="ambient-orb orb-one"></div>
+      <div class="ambient-orb orb-two"></div>
+      <div class="ambient-grid"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Melbourne based, built for Australian businesses</p>
+          <h1>Scale Your Operations Without Scaling Your Team</h1>
+          <p class="lead">Aussie AI builds custom AI agents and automation systems that handle enquiries, missed calls, bookings, inboxes, follow ups and repetitive admin, built around the tools your business already uses.</p>
+          <div class="actions">
+            <a class="btn primary" href="#contact">Book Free AI Audit</a>
+            <a class="btn secondary" href="#services">See What We Build</a>
+          </div>
+          <div class="trust" aria-label="Trust points">
+            {['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No technical knowledge required', 'Start small, scale later', 'Human handoff included', 'Strategy, build and support available'].map((t) => <span>{t}</span>)}
+          </div>
+        </div>
+        <div class="dashboard-wrap reveal" data-parallax>
+          <div class="dashboard">
+            <div class="dash-top"><span></span><b>AI operations dashboard</b><em>Live workflow</em></div>
+            {dashboard.map((d, i) => <div class="dash-row" style={`--i:${i}`}><span class="pulse"></span><strong>{d}</strong><small>{i % 2 ? 'Reviewed' : 'Automated'}</small></div>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container section-head reveal">
+        <p class="eyebrow">What Aussie AI does</p>
+        <h2>AI agents that work inside your business.</h2>
+        <p class="section-copy">Aussie AI designs and builds practical AI systems that connect to your website, inbox, phone, CRM, calendar, forms, spreadsheets and daily workflows.</p>
+      </div>
+      <div class="container bento services-grid">
+        {services.map(([t, d]) => <article class="card reveal"><h3>{t}</h3><p>{d}</p><a href="#contact">Book an audit</a></article>)}
+      </div>
+    </section>
+
+    <section class="section split-section">
+      <div class="container reveal">
+        <p class="eyebrow">Problem and solution</p>
+        <h2>Manual work is costing more than you think.</h2>
+        <div class="compare">
+          <article class="card danger"><h3>Without Aussie AI</h3>{without.map((x) => <p><span>×</span>{x}</p>)}</article>
+          <article class="card success"><h3>With Aussie AI</h3>{withAi.map((x) => <p><span>✓</span>{x}</p>)}</article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="solutions">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Solutions</p>
+        <h2>Start with one automation or build a complete AI operations system.</h2>
+      </div>
+      <div class="container bento four">
+        {solutions.map(([t, d]) => <article class="card reveal"><h3>{t}</h3><p>{d}</p></article>)}
+      </div>
+    </section>
+
+    <section class="section" id="industries">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Industries</p>
+        <h2>Built for the businesses Australia actually runs on.</h2>
+      </div>
+      <div class="container bento three">
+        {industries.map(([t, d]) => <article class="card reveal"><h3>{t}</h3><p>{d}</p></article>)}
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="container reveal">
+        <p class="eyebrow">Results</p>
+        <h2>Designed around real business outcomes.</h2>
+        <div class="outcomes">{outcomes.map((o) => <span>{o}</span>)}</div>
+        <p class="note">Results depend on business type, enquiry volume, tools and workflow complexity.</p>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Process</p>
+        <h2>Simple process. No tech overwhelm.</h2>
+      </div>
+      <div class="container steps">
+        {steps.map(([t, d], i) => <article class="card step reveal"><span>Step {i + 1}</span><h3>{t}</h3><p>{d}</p></article>)}
+      </div>
+    </section>
+
+    <section class="section tools">
+      <div class="container tools-panel reveal">
+        <p class="eyebrow">Integrations</p>
+        <h2>Works with the tools you already use.</h2>
+        <p>Aussie AI connects the tools your business already relies on and makes them work together.</p>
+        <div class="tool-cloud">{toolCategories.map((tool) => <span>{tool}</span>)}</div>
+        <p class="note">{toolList}</p>
+      </div>
+    </section>
+
+    <section class="section audit">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Free audit first</p>
+        <h2>Every workflow is different.</h2>
+        <p>Some businesses need one simple automation. Others need a complete AI operations system across calls, inboxes, CRM, bookings and reporting. Aussie AI starts with a free audit so we can recommend the simplest solution that actually makes sense.</p>
+        <a class="btn primary" href="#contact">Book Free AI Audit</a>
+        <p class="note">We will review your workflow, show what can be automated and recommend the simplest path forward.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container faq-layout">
+        <div class="reveal"><p class="eyebrow">FAQ</p><h2>Common questions.</h2><p class="section-copy">Short answers before we talk through your workflow.</p><a class="btn secondary" href="#contact">Talk to Aussie AI</a></div>
+        <div class="faq-list reveal">{faqs.map(([q, a]) => <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>)}</div>
+      </div>
+    </section>
+
+    <section class="section final-cta">
+      <div class="container narrow reveal">
+        <h2>Ready to see what AI can automate in your business?</h2>
+        <p>Book a free AI audit and we will show you where Aussie AI can help you respond faster, capture more leads and reduce manual work.</p>
+        <a class="btn primary" href="#contact">Book Free AI Audit</a>
+        <p class="note">No pressure. No technical jargon. Just a clear automation roadmap.</p>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Book your free AI audit.</h2>
+          <p>Tell us what is slowing your team down. We will come back with practical automation opportunities for your business.</p>
+        </div>
+        <form class="card form reveal" action="https://formspree.io/f/mpqopryb" method="POST">
+          <input name="name" placeholder="Name" required />
+          <input name="business" placeholder="Business name" required />
+          <input name="email" type="email" placeholder="Email" required />
+          <input name="phone" placeholder="Phone" />
+          <input name="website" placeholder="Website" />
+          <input name="business_type" placeholder="Type of business" />
+          <textarea name="automate" placeholder="What do you want to automate?" rows="3"></textarea>
+          <textarea name="tools" placeholder="Current tools used" rows="3"></textarea>
+          <select name="preferred_contact"><option>Preferred contact method</option><option>Email</option><option>Phone</option><option>SMS</option></select>
+          <textarea name="message" placeholder="Message" rows="4"></textarea>
+          <button class="btn primary" type="submit">Book Free AI Audit</button>
+        </form>
+      </div>
+    </section>
   </main>
   <Footer />
-  <script src="/widget.js" defer></script>
+  <script is:inline>
+    const revealItems = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.12 });
+    revealItems.forEach((item) => observer.observe(item));
+
+    const dashboard = document.querySelector('[data-parallax]');
+    window.addEventListener('scroll', () => {
+      if (!dashboard || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      dashboard.style.setProperty('--lift', `${Math.min(window.scrollY * 0.018, 16)}px`);
+    }, { passive: true });
+  </script>
 </Base>
