@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="Contact: Book a Free AI Audit" description="Book a free AI audit with Aussie AI in Melbourne.">
+  <Nav />
+  <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Contact</p><h1>Book your free AI audit.</h1><p class="lead">Tell us what is slowing your team down. We will show practical automation opportunities for your business.</p></div></section>
+  <section class="section contact"><div class="container contact-grid"><div class="reveal"><p class="eyebrow">Free audit</p><h2>What happens after you submit?</h2><p>We review your workflow, tools and repetitive tasks. Then we recommend the simplest path forward, with no pressure and no technical jargon.</p><div class="trust contact-trust">{['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No budget question', 'Human handoff included'].map((item) => <span>{item}</span>)}</div></div><form class="card form reveal" action="https://formspree.io/f/mpqopryb" method="POST"><input name="name" placeholder="Name" required /><input name="business" placeholder="Business name" required /><input name="email" type="email" placeholder="Email" required /><input name="phone" placeholder="Phone" /><input name="website" placeholder="Website" /><input name="business_type" placeholder="Type of business" /><textarea name="automate" placeholder="What do you want to automate?" rows="3"></textarea><textarea name="tools" placeholder="Current tools used" rows="3"></textarea><select name="preferred_contact"><option>Preferred contact method</option><option>Email</option><option>Phone</option><option>SMS</option></select><textarea name="message" placeholder="Message" rows="4"></textarea><button class="btn primary" type="submit">Book Free AI Audit</button></form></div></section></main>
+  <Footer />
+</Base>
