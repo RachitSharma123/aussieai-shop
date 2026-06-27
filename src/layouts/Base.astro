@@ -34,10 +34,10 @@ const {
 </head>
 <body>
   <div class="site-background" aria-hidden="true" data-ambient-background>
-    <span class="bg-blob bg-blob-one"></span>
-    <span class="bg-blob bg-blob-two"></span>
-    <span class="bg-blob bg-blob-three"></span>
-    <span class="bg-grid"></span>
+    <canvas class="signal-canvas" data-signal-canvas></canvas>
+    <span class="signal-wash"></span>
+    <span class="signal-grid"></span>
+    <span class="signal-horizon"></span>
   </div>
   <div class="site-surface">
     <slot />
@@ -57,6 +57,171 @@ const {
       ambientBackground.style.setProperty('--pointer-x', `${x}px`);
       ambientBackground.style.setProperty('--pointer-y', `${y}px`);
     }, { passive: true });
+  }
+
+  const signalCanvas = document.querySelector('[data-signal-canvas]');
+  if (signalCanvas instanceof HTMLCanvasElement) {
+    const context = signalCanvas.getContext('2d', { alpha: true });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointer = { x: 0.66, y: 0.28, active: false };
+    const nodeCount = 46;
+    let nodes = [];
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let frameId = 0;
+
+    const palette = {
+      green: '46, 125, 99',
+      deep: '21, 92, 73',
+      amber: '244, 166, 42',
+      blue: '47, 111, 237',
+    };
+
+    function seeded(index) {
+      const value = Math.sin(index * 127.1 + 311.7) * 43758.5453;
+      return value - Math.floor(value);
+    }
+
+    function createNodes() {
+      nodes = Array.from({ length: nodeCount }, (_, index) => {
+        const column = index % 9;
+        const row = Math.floor(index / 9);
+        return {
+          baseX: (column + 0.42 + seeded(index) * 0.36) / 9.4,
+          baseY: (row + 0.32 + seeded(index + 19) * 0.54) / 5.9,
+          phase: seeded(index + 43) * Math.PI * 2,
+          drift: 0.004 + seeded(index + 71) * 0.012,
+          size: 1.4 + seeded(index + 91) * 2.4,
+          tone: index % 4,
+        };
+      });
+    }
+
+    function resize() {
+      if (!context) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 1.6);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      signalCanvas.width = Math.floor(width * dpr);
+      signalCanvas.height = Math.floor(height * dpr);
+      signalCanvas.style.width = `${width}px`;
+      signalCanvas.style.height = `${height}px`;
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function nodePosition(node, time) {
+      const driftX = Math.cos(time * node.drift + node.phase) * 20;
+      const driftY = Math.sin(time * node.drift * 1.3 + node.phase) * 14;
+      const px = pointer.x * width;
+      const py = pointer.y * height;
+      const baseX = node.baseX * width;
+      const baseY = node.baseY * height;
+      const dx = px - baseX;
+      const dy = py - baseY;
+      const distance = Math.max(Math.hypot(dx, dy), 1);
+      const pull = pointer.active ? Math.max(0, 1 - distance / 520) : 0.18;
+      return {
+        x: baseX + driftX + dx * pull * 0.055,
+        y: baseY + driftY + dy * pull * 0.038,
+      };
+    }
+
+    function draw(time) {
+      if (!context) return;
+      context.clearRect(0, 0, width, height);
+      const points = nodes.map((node) => ({ ...nodePosition(node, time), node }));
+      const focusX = pointer.x * width;
+      const focusY = pointer.y * height;
+
+      const glow = context.createRadialGradient(focusX, focusY, 0, focusX, focusY, Math.max(width, height) * 0.54);
+      glow.addColorStop(0, `rgba(${palette.amber}, ${pointer.active ? 0.18 : 0.08})`);
+      glow.addColorStop(0.34, `rgba(${palette.green}, 0.08)`);
+      glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      context.fillStyle = glow;
+      context.fillRect(0, 0, width, height);
+
+      context.lineWidth = 1;
+      for (let i = 0; i < points.length; i += 1) {
+        for (let j = i + 1; j < points.length; j += 1) {
+          const a = points[i];
+          const b = points[j];
+          const distance = Math.hypot(a.x - b.x, a.y - b.y);
+          if (distance > 190) continue;
+          const focusDistance = Math.min(
+            Math.hypot(a.x - focusX, a.y - focusY),
+            Math.hypot(b.x - focusX, b.y - focusY),
+          );
+          const alpha = (1 - distance / 190) * (pointer.active ? Math.max(0.14, 1 - focusDistance / 640) : 0.34);
+          context.strokeStyle = `rgba(${palette.deep}, ${alpha * 0.28})`;
+          context.beginPath();
+          context.moveTo(a.x, a.y);
+          context.lineTo(b.x, b.y);
+          context.stroke();
+        }
+      }
+
+      points.forEach(({ x, y, node }) => {
+        const tone = [palette.green, palette.amber, palette.blue, palette.deep][node.tone];
+        const focusDistance = Math.hypot(x - focusX, y - focusY);
+        const active = pointer.active && focusDistance < 280;
+        context.fillStyle = `rgba(${tone}, ${active ? 0.58 : 0.28})`;
+        context.beginPath();
+        context.arc(x, y, active ? node.size + 1.5 : node.size, 0, Math.PI * 2);
+        context.fill();
+      });
+    }
+
+    function tick(time) {
+      draw(time);
+      if (!reducedMotion.matches && !document.hidden) {
+        frameId = requestAnimationFrame(tick);
+      }
+    }
+
+    function start() {
+      cancelAnimationFrame(frameId);
+      if (reducedMotion.matches) {
+        draw(performance.now());
+      } else {
+        frameId = requestAnimationFrame(tick);
+      }
+    }
+
+    createNodes();
+    resize();
+    start();
+
+    window.addEventListener('resize', () => {
+      resize();
+      start();
+    }, { passive: true });
+
+    window.addEventListener('pointermove', (event) => {
+      pointer.x = event.clientX / window.innerWidth;
+      pointer.y = event.clientY / window.innerHeight;
+      pointer.active = true;
+    }, { passive: true });
+
+    window.addEventListener('pointerleave', () => {
+      pointer.active = false;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (event) => {
+      const touch = event.touches[0];
+      if (!touch) return;
+      pointer.x = touch.clientX / window.innerWidth;
+      pointer.y = touch.clientY / window.innerHeight;
+      pointer.active = true;
+    }, { passive: true });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(frameId);
+      } else {
+        start();
+      }
+    });
   }
   </script>
 </body>
