@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { services } from '../data/site';
+---
+<Base title="Services: Aussie AI" description="AI agents and automation services for Australian businesses.">
+  <Nav />
+  <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Services</p><h1>AI agents that work inside your business.</h1><p class="lead">Aussie AI builds practical systems that respond, organise, update and hand over work inside the tools your team already uses.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container service-list">{services.map((item) => <article class="card service-detail reveal"><div><p class="eyebrow">Service</p><h2>{item.title}</h2><p>{item.does}</p></div><div class="detail-grid"><div><h3>Why it matters</h3><p>{item.matters}</p></div><div><h3>Example use cases</h3><ul>{item.useCases.map((useCase) => <li>{useCase}</li>)}</ul></div><div><h3>Best for</h3><p>{item.bestFor}</p></div></div><a class="btn secondary" href="/contact">Book Free AI Audit</a></article>)}</div></section></main>
+  <Footer />
+</Base>
