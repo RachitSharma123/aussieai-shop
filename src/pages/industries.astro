@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { industries } from '../data/site';
+---
+<Base title="Industries: Aussie AI" description="AI automation for Australian tradies, cafes, clinics, NDIS providers, agencies and service businesses.">
+  <Nav />
+  <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Industries</p><h1>Built for the businesses Australia actually runs on.</h1><p class="lead">Every business has different admin pressure. Aussie AI helps find the workflows worth automating first.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container bento three">{industries.map((item) => <article class="card industry-card reveal"><h3>{item.title}</h3><p><strong>Common problem:</strong> {item.problem}</p><p><strong>What can be automated:</strong> {item.automate}</p><p><strong>Business outcome:</strong> {item.outcome}</p><a href="/contact">Discuss automation</a></article>)}</div></section></main>
+  <Footer />
+</Base>

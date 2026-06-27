@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { processSteps } from '../data/site';
+---
+<Base title="Process: Aussie AI" description="A simple process for planning, building and improving AI automation systems.">
+  <Nav />
+  <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Process</p><h1>Simple process. No tech overwhelm.</h1><p class="lead">We keep the work practical, clear and focused on the workflows that matter most.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container process-list">{processSteps.map((step, i) => <article class="card process-card reveal"><span>Step {i + 1}</span><h2>{step.title}</h2><div class="detail-grid"><div><h3>What happens</h3><p>{step.happens}</p></div><div><h3>What you provide</h3><p>{step.client}</p></div><div><h3>What Aussie AI handles</h3><p>{step.handles}</p></div><div><h3>What you get</h3><p>{step.gets}</p></div></div></article>)}</div></section></main>
+  <Footer />
+</Base>

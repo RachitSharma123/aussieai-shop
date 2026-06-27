@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { outcomes } from '../data/site';
+---
+<Base title="Results: Aussie AI" description="Business outcomes from practical AI agents and automation systems.">
+  <Nav />
+  <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Results</p><h1>Designed around real business outcomes.</h1><p class="lead">No fake guarantees. We focus on faster response, cleaner workflows and less repetitive admin.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container bento three">{outcomes.map((outcome) => <article class="card reveal"><h3>{outcome}</h3><p>We design automations around practical improvements your team can understand and use.</p></article>)}</div><div class="container note-panel reveal"><p>Results depend on business type, enquiry volume, tools and workflow complexity.</p></div></section>
+  <section class="section"><div class="container narrow card reveal"><p class="eyebrow">Example automation scenario</p><h2>Missed enquiry to booked appointment.</h2><p>A customer submits a form after hours. An AI agent replies, asks the right questions, captures the details, updates the CRM, adds a booking request and sends your team a clear summary for review.</p><a class="btn primary" href="/contact">Book Free AI Audit</a></div></section></main>
+  <Footer />
+</Base>
