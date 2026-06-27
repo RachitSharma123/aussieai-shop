@@ -1,184 +1,508 @@
 (function () {
-  const N8N_WEBHOOK = 'https://n8n.aussieai.shop/webhook/aussie-chatbot';
+  const API_ENDPOINT = '/api/chat';
   const BOT_NAME = 'Aria';
-  const BOT_AVATAR = '⚡';
-
-  const sessionId = 'sess_' + Math.random().toString(36).slice(2);
-  let messages = [];
+  const sessionId = 'chat_' + Math.random().toString(36).slice(2);
+  const messages = [];
   let isOpen = false;
+  let isSending = false;
 
   const styles = `
-    #aussie-chat-btn {
-      position: fixed; bottom: 24px; right: 24px; z-index: 99999;
-      width: 60px; height: 60px; border-radius: 50%;
-      background: #f5a623; border: none; cursor: pointer;
-      font-size: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      transition: transform 0.2s; display: flex; align-items: center; justify-content: center;
+    .aussie-chat-launcher {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1000;
+      display: inline-flex;
+      width: 62px;
+      height: 62px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(31, 26, 16, 0.12);
+      border-radius: 999px;
+      color: #1f1a10;
+      background: linear-gradient(135deg, #ffc85d, #f4a62a);
+      box-shadow: 0 18px 42px rgba(44, 54, 51, 0.22);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    #aussie-chat-btn:hover { transform: scale(1.1); }
-    #aussie-chat-window {
-      position: fixed; bottom: 96px; right: 24px; z-index: 99998;
-      width: 360px; height: 520px; background: #fff;
-      border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.18);
-      display: none; flex-direction: column; overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    .aussie-chat-launcher:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 48px rgba(44, 54, 51, 0.26);
     }
-    #aussie-chat-window.open { display: flex; }
-    .aussie-header {
-      background: #1a1a18; color: #fff; padding: 16px 18px;
-      display: flex; align-items: center; gap: 12px;
+
+    .aussie-chat-launcher svg {
+      width: 27px;
+      height: 27px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.2;
     }
-    .aussie-header-avatar { font-size: 24px; }
-    .aussie-header-name { font-weight: 700; font-size: 15px; }
-    .aussie-header-status { font-size: 12px; color: #f5a623; margin-top: 2px; }
-    .aussie-messages {
-      flex: 1; overflow-y: auto; padding: 16px; display: flex;
-      flex-direction: column; gap: 10px; background: #f8f8f6;
+
+    .aussie-chat-panel {
+      position: fixed;
+      right: 22px;
+      bottom: 96px;
+      z-index: 1000;
+      display: grid;
+      width: min(372px, calc(100vw - 28px));
+      height: min(500px, calc(100vh - 140px));
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      border: 1px solid rgba(46, 125, 99, 0.18);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 28px 70px rgba(44, 54, 51, 0.24);
+      backdrop-filter: blur(22px);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(14px) scale(0.98);
+      transition: opacity 0.22s ease, transform 0.22s ease;
     }
-    .aussie-msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
-    .aussie-msg.bot { background: #fff; color: #1a1a18; border-bottom-left-radius: 4px; align-self: flex-start; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-    .aussie-msg.user { background: #f5a623; color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
-    .aussie-typing { display: flex; gap: 4px; padding: 10px 14px; background: #fff; border-radius: 12px; border-bottom-left-radius: 4px; width: fit-content; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-    .aussie-typing span { width: 7px; height: 7px; background: #aaa; border-radius: 50%; animation: aussie-bounce 1.2s infinite; }
-    .aussie-typing span:nth-child(2) { animation-delay: 0.2s; }
-    .aussie-typing span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes aussie-bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
-    .aussie-input-area { padding: 12px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 8px; }
-    .aussie-input {
-      flex: 1; border: 1px solid #e0e0e0; border-radius: 24px; padding: 10px 16px;
-      font-size: 14px; outline: none; transition: border-color 0.2s;
+
+    .aussie-chat-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
     }
-    .aussie-input:focus { border-color: #f5a623; }
-    .aussie-send {
-      width: 40px; height: 40px; background: #f5a623; border: none; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s; flex-shrink: 0;
+
+    .aussie-chat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      border-bottom: 1px solid rgba(23, 33, 31, 0.08);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(244, 166, 42, 0.2), transparent 42%),
+        linear-gradient(135deg, rgba(238, 247, 242, 0.95), rgba(255, 249, 236, 0.92));
     }
-    .aussie-send:hover { background: #e09510; }
-    .aussie-send svg { width: 18px; height: 18px; fill: #fff; }
+
+    .aussie-chat-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 15px;
+      color: #1f1a10;
+      font-size: 0.82rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffd47a, #f4a62a);
+      box-shadow: 0 12px 24px rgba(244, 166, 42, 0.2);
+    }
+
+    .aussie-chat-title {
+      min-width: 0;
+      flex: 1;
+      color: #17211f;
+      font-size: 0.96rem;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .aussie-chat-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+      color: #155c49;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .aussie-chat-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #2e7d63;
+      box-shadow: 0 0 0 5px rgba(46, 125, 99, 0.1);
+    }
+
+    .aussie-chat-close {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid rgba(23, 33, 31, 0.08);
+      border-radius: 999px;
+      color: #17211f;
+      background: rgba(255, 255, 255, 0.72);
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 850;
+    }
+
+    .aussie-chat-messages {
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 90% 14%, rgba(47, 111, 237, 0.08), transparent 34%),
+        linear-gradient(180deg, rgba(255, 249, 236, 0.62), rgba(238, 247, 242, 0.5));
+    }
+
+    .aussie-chat-message {
+      max-width: 86%;
+      border: 1px solid rgba(23, 33, 31, 0.08);
+      border-radius: 17px;
+      padding: 10px 12px;
+      color: #17211f;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      word-break: break-word;
+      box-shadow: 0 8px 20px rgba(44, 54, 51, 0.06);
+    }
+
+    .aussie-chat-message.bot {
+      align-self: flex-start;
+      border-bottom-left-radius: 6px;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .aussie-chat-message.user {
+      align-self: flex-end;
+      border-color: rgba(244, 166, 42, 0.38);
+      border-bottom-right-radius: 6px;
+      background: linear-gradient(135deg, rgba(255, 207, 109, 0.96), rgba(244, 166, 42, 0.92));
+      font-weight: 650;
+    }
+
+    .aussie-chat-starters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .aussie-chat-starter {
+      border: 1px solid rgba(46, 125, 99, 0.16);
+      border-radius: 999px;
+      padding: 8px 10px;
+      color: #155c49;
+      background: rgba(255, 255, 255, 0.72);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .aussie-chat-typing {
+      display: inline-flex;
+      width: fit-content;
+      gap: 5px;
+      align-items: center;
+      border: 1px solid rgba(23, 33, 31, 0.08);
+      border-radius: 16px;
+      border-bottom-left-radius: 6px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 8px 20px rgba(44, 54, 51, 0.06);
+    }
+
+    .aussie-chat-typing span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #2e7d63;
+      animation: aussieChatPulse 1.2s ease-in-out infinite;
+    }
+
+    .aussie-chat-typing span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .aussie-chat-typing span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .aussie-chat-form {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid rgba(23, 33, 31, 0.08);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .aussie-chat-input {
+      min-width: 0;
+      flex: 1;
+      border: 1px solid rgba(23, 33, 31, 0.12);
+      border-radius: 999px;
+      padding: 12px 14px;
+      color: #17211f;
+      background: rgba(248, 246, 240, 0.88);
+      font: inherit;
+      outline: none;
+    }
+
+    .aussie-chat-input:focus {
+      border-color: rgba(244, 166, 42, 0.54);
+      box-shadow: 0 0 0 3px rgba(244, 166, 42, 0.13);
+    }
+
+    .aussie-chat-send {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 0;
+      border-radius: 999px;
+      color: #1f1a10;
+      background: linear-gradient(135deg, #ffc85d, #f4a62a);
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(244, 166, 42, 0.24);
+    }
+
+    .aussie-chat-send:disabled {
+      cursor: wait;
+      opacity: 0.65;
+    }
+
+    .aussie-chat-send svg {
+      width: 19px;
+      height: 19px;
+      fill: currentColor;
+    }
+
+    @keyframes aussieChatPulse {
+      0%, 80%, 100% {
+        transform: translateY(0);
+        opacity: 0.45;
+      }
+      40% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aussie-chat-launcher,
+      .aussie-chat-panel,
+      .aussie-chat-typing span {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .aussie-chat-launcher {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .aussie-chat-panel {
+        right: 12px;
+        bottom: 88px;
+        width: calc(100vw - 24px);
+        height: min(540px, calc(100vh - 116px));
+        border-radius: 20px;
+      }
+    }
   `;
 
-  const styleEl = document.createElement('style');
-  styleEl.textContent = styles;
-  document.head.appendChild(styleEl);
-
-  const btn = document.createElement('button');
-  btn.id = 'aussie-chat-btn';
-  btn.innerHTML = '💬';
-  document.body.appendChild(btn);
-
-  const win = document.createElement('div');
-  win.id = 'aussie-chat-window';
-  win.innerHTML = `
-    <div class="aussie-header">
-      <div class="aussie-header-avatar">${BOT_AVATAR}</div>
-      <div>
-        <div class="aussie-header-name">${BOT_NAME} — AussieAI</div>
-        <div class="aussie-header-status">● Online now</div>
-      </div>
-    </div>
-    <div class="aussie-messages" id="aussie-msgs"></div>
-    <div class="aussie-input-area">
-      <input class="aussie-input" id="aussie-input" type="text" placeholder="Ask me anything..." />
-      <button class="aussie-send" id="aussie-send">
-        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
-      </button>
-    </div>
-  `;
-  document.body.appendChild(win);
-
-  btn.addEventListener('click', () => {
-    isOpen = !isOpen;
-    win.classList.toggle('open', isOpen);
-    btn.innerHTML = isOpen ? '✕' : '💬';
-    if (isOpen && messages.length === 0) sendGreeting();
-  });
-
-  function sendGreeting() {
-    addBotMessage("Hi! I'm Aria from AussieAI. What kind of business do you run?");
+  function iconChat() {
+    return '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.7 8.3 9.7 9.7 0 0 1-4.2-.95L3 20l1.35-4.35A8.1 8.1 0 0 1 3.6 12 8.4 8.4 0 0 1 12.3 3.7 8.4 8.4 0 0 1 21 11.5Z"/><path d="M8.1 10.2h8.1M8.1 13.5h5.5"/></svg>';
   }
 
-  function addBotMessage(text) {
-    const el = document.createElement('div');
-    el.className = 'aussie-msg bot';
-    el.textContent = text;
-    document.getElementById('aussie-msgs').appendChild(el);
-    scrollBottom();
-    messages.push({ role: 'assistant', content: text });
+  function iconSend() {
+    return '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20.4 22 12 3 3.6v6.8l11.6 1.6L3 13.6v6.8Z"/></svg>';
   }
 
-  function addUserMessage(text) {
-    const el = document.createElement('div');
-    el.className = 'aussie-msg user';
-    el.textContent = text;
-    document.getElementById('aussie-msgs').appendChild(el);
-    scrollBottom();
-    messages.push({ role: 'user', content: text });
+  function scrollToBottom() {
+    const messagesEl = document.querySelector('[data-aussie-chat-messages]');
+    if (messagesEl) messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  function showTyping() {
-    const el = document.createElement('div');
-    el.className = 'aussie-typing';
-    el.id = 'aussie-typing';
-    el.innerHTML = '<span></span><span></span><span></span>';
-    document.getElementById('aussie-msgs').appendChild(el);
-    scrollBottom();
+  function addMessage(role, text) {
+    const messagesEl = document.querySelector('[data-aussie-chat-messages]');
+    const messageEl = document.createElement('div');
+    messageEl.className = `aussie-chat-message ${role === 'user' ? 'user' : 'bot'}`;
+    messageEl.textContent = text;
+    messagesEl.appendChild(messageEl);
+    scrollToBottom();
+
+    if (role === 'user' || role === 'assistant') {
+      messages.push({ role, content: text });
+    }
   }
 
-  function hideTyping() {
-    const el = document.getElementById('aussie-typing');
-    if (el) el.remove();
+  function addGreeting() {
+    if (messages.length) return;
+
+    addMessage('assistant', "Hi, I'm Aria from Aussie AI. Tell me what is slowing your team down and I can suggest what to automate first.");
+
+    const messagesEl = document.querySelector('[data-aussie-chat-messages]');
+    const starters = document.createElement('div');
+    starters.className = 'aussie-chat-starters';
+    ['Missed calls', 'Website chat', 'Workflow admin'].forEach((label) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'aussie-chat-starter';
+      button.textContent = label;
+      button.addEventListener('click', () => sendMessage(label));
+      starters.appendChild(button);
+    });
+    messagesEl.appendChild(starters);
+    scrollToBottom();
   }
 
-  function scrollBottom() {
-    const msgs = document.getElementById('aussie-msgs');
-    msgs.scrollTop = msgs.scrollHeight;
-  }
+  function setTyping(isTyping) {
+    const messagesEl = document.querySelector('[data-aussie-chat-messages]');
+    const existing = document.querySelector('[data-aussie-chat-typing]');
 
-  const GREETINGS = /^(hey|hi|hello|yo|sup|g'day|hiya|howdy|heya|helo|hii|helo|hey there|hi there)[\s!.]*$/i;
-
-  async function sendMessage(text) {
-    // Intercept pure greetings mid-conversation — handle locally
-    if (GREETINGS.test(text.trim()) && messages.length > 0) {
-      addUserMessage(text);
-      setTimeout(() => {
-        const lastBot = messages.filter(m => m.role === 'assistant').pop();
-        // Re-ask the last bot question naturally
-        const reask = lastBot
-          ? lastBot.content.replace(/^(hi|hey|hello|g'day)[^a-z]*/i, '').trim()
-          : "What kind of business do you run?";
-        addBotMessage("Hey! 😊 " + reask);
-      }, 600);
+    if (!isTyping && existing) {
+      existing.remove();
       return;
     }
 
-    addUserMessage(text);
-    showTyping();
-
-    try {
-      const res = await fetch(N8N_WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages, sessionId })
-      });
-      const data = await res.json();
-      hideTyping();
-      addBotMessage(data.reply || "Sorry mate, something went wrong. Try again!");
-    } catch (e) {
-      hideTyping();
-      addBotMessage("Oops, connection issue. Try again in a sec mate!");
+    if (isTyping && !existing) {
+      const typing = document.createElement('div');
+      typing.className = 'aussie-chat-typing';
+      typing.dataset.aussieChatTyping = 'true';
+      typing.setAttribute('aria-label', `${BOT_NAME} is typing`);
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      messagesEl.appendChild(typing);
+      scrollToBottom();
     }
   }
 
-  document.getElementById('aussie-send').addEventListener('click', () => {
-    const input = document.getElementById('aussie-input');
-    const text = input.value.trim();
-    if (!text) return;
-    input.value = '';
-    sendMessage(text);
-  });
+  function setSending(nextValue) {
+    isSending = nextValue;
+    const sendButton = document.querySelector('[data-aussie-chat-send]');
+    const input = document.querySelector('[data-aussie-chat-input]');
+    if (sendButton) sendButton.disabled = nextValue;
+    if (input) input.disabled = nextValue;
+  }
 
-  document.getElementById('aussie-input').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') document.getElementById('aussie-send').click();
-  });
+  function openChat() {
+    const panel = document.querySelector('[data-aussie-chat-panel]');
+    const launcher = document.querySelector('[data-aussie-chat-launcher]');
+    isOpen = true;
+    panel.classList.add('open');
+    launcher.setAttribute('aria-expanded', 'true');
+    addGreeting();
+    window.setTimeout(() => document.querySelector('[data-aussie-chat-input]')?.focus(), 80);
+  }
+
+  function closeChat() {
+    const panel = document.querySelector('[data-aussie-chat-panel]');
+    const launcher = document.querySelector('[data-aussie-chat-launcher]');
+    isOpen = false;
+    panel.classList.remove('open');
+    launcher.setAttribute('aria-expanded', 'false');
+    launcher.focus();
+  }
+
+  async function sendMessage(text) {
+    const trimmed = text.trim();
+    if (!trimmed || isSending) return;
+
+    document.querySelector('.aussie-chat-starters')?.remove();
+    addMessage('user', trimmed);
+    setSending(true);
+    setTyping(true);
+
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 26000);
+
+    try {
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          sessionId,
+          page: window.location.pathname,
+          messages,
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || 'Chat request failed');
+      }
+
+      addMessage('assistant', data.reply || 'I can help with that. What kind of workflow are you trying to improve?');
+    } catch (error) {
+      const fallback = error.name === 'AbortError'
+        ? 'That took too long to reply. Please try again or use the contact form.'
+        : 'Chat is being connected. The contact form is the quickest path right now.';
+      addMessage('assistant', fallback);
+    } finally {
+      window.clearTimeout(timeout);
+      setTyping(false);
+      setSending(false);
+    }
+  }
+
+  function init() {
+    if (document.querySelector('[data-aussie-chat-launcher]')) return;
+
+    const styleEl = document.createElement('style');
+    styleEl.textContent = styles;
+    document.head.appendChild(styleEl);
+
+    const launcher = document.createElement('button');
+    launcher.type = 'button';
+    launcher.className = 'aussie-chat-launcher';
+    launcher.dataset.aussieChatLauncher = 'true';
+    launcher.setAttribute('aria-label', 'Open Aussie AI chat');
+    launcher.setAttribute('aria-controls', 'aussie-chat-panel');
+    launcher.setAttribute('aria-expanded', 'false');
+    launcher.innerHTML = iconChat();
+    document.body.appendChild(launcher);
+
+    const panel = document.createElement('section');
+    panel.id = 'aussie-chat-panel';
+    panel.className = 'aussie-chat-panel';
+    panel.dataset.aussieChatPanel = 'true';
+    panel.setAttribute('aria-label', 'Aussie AI chat assistant');
+    panel.innerHTML = `
+      <header class="aussie-chat-header">
+        <div class="aussie-chat-mark">AI</div>
+        <div class="aussie-chat-title">
+          <div>${BOT_NAME} at Aussie AI</div>
+          <div class="aussie-chat-status">AI assistant</div>
+        </div>
+        <button class="aussie-chat-close" type="button" data-aussie-chat-close aria-label="Close chat">x</button>
+      </header>
+      <div class="aussie-chat-messages" data-aussie-chat-messages aria-live="polite"></div>
+      <form class="aussie-chat-form" data-aussie-chat-form>
+        <input class="aussie-chat-input" data-aussie-chat-input type="text" autocomplete="off" maxlength="900" placeholder="Ask what AI can automate..." aria-label="Chat message" />
+        <button class="aussie-chat-send" data-aussie-chat-send type="submit" aria-label="Send message">${iconSend()}</button>
+      </form>
+    `;
+    document.body.appendChild(panel);
+
+    launcher.addEventListener('click', () => {
+      if (isOpen) closeChat();
+      else openChat();
+    });
+
+    panel.querySelector('[data-aussie-chat-close]').addEventListener('click', closeChat);
+    panel.querySelector('[data-aussie-chat-form]').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = panel.querySelector('[data-aussie-chat-input]');
+      const value = input.value;
+      input.value = '';
+      sendMessage(value);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen) closeChat();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
