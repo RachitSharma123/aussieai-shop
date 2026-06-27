@@ -35,6 +35,37 @@ const {
 <body>
   <div class="site-background" aria-hidden="true" data-ambient-background>
     <canvas class="signal-canvas" data-signal-canvas></canvas>
+    <div class="floating-objects">
+      <span class="float-object object-panel">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="float-object object-chat">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="float-object object-chip">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="float-object object-flow">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="float-object object-stack">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <span class="float-object object-dial">
+        <span></span>
+      </span>
+    </div>
     <span class="signal-wash"></span>
     <span class="signal-grid"></span>
     <span class="signal-horizon"></span>
@@ -64,7 +95,7 @@ const {
     const context = signalCanvas.getContext('2d', { alpha: true });
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const pointer = { x: 0.66, y: 0.28, active: false };
-    const nodeCount = 46;
+    const nodeCount = 62;
     let nodes = [];
     let width = 0;
     let height = 0;
@@ -92,7 +123,7 @@ const {
           baseY: (row + 0.32 + seeded(index + 19) * 0.54) / 5.9,
           phase: seeded(index + 43) * Math.PI * 2,
           drift: 0.004 + seeded(index + 71) * 0.012,
-          size: 1.4 + seeded(index + 91) * 2.4,
+          size: 2 + seeded(index + 91) * 3.1,
           tone: index % 4,
         };
       });
@@ -135,8 +166,8 @@ const {
       const focusY = pointer.y * height;
 
       const glow = context.createRadialGradient(focusX, focusY, 0, focusX, focusY, Math.max(width, height) * 0.54);
-      glow.addColorStop(0, `rgba(${palette.amber}, ${pointer.active ? 0.18 : 0.08})`);
-      glow.addColorStop(0.34, `rgba(${palette.green}, 0.08)`);
+      glow.addColorStop(0, `rgba(${palette.amber}, ${pointer.active ? 0.3 : 0.16})`);
+      glow.addColorStop(0.34, `rgba(${palette.green}, 0.14)`);
       glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
       context.fillStyle = glow;
       context.fillRect(0, 0, width, height);
@@ -152,8 +183,8 @@ const {
             Math.hypot(a.x - focusX, a.y - focusY),
             Math.hypot(b.x - focusX, b.y - focusY),
           );
-          const alpha = (1 - distance / 190) * (pointer.active ? Math.max(0.14, 1 - focusDistance / 640) : 0.34);
-          context.strokeStyle = `rgba(${palette.deep}, ${alpha * 0.28})`;
+          const alpha = (1 - distance / 190) * (pointer.active ? Math.max(0.2, 1 - focusDistance / 640) : 0.46);
+          context.strokeStyle = `rgba(${palette.deep}, ${alpha * 0.46})`;
           context.beginPath();
           context.moveTo(a.x, a.y);
           context.lineTo(b.x, b.y);
@@ -165,7 +196,7 @@ const {
         const tone = [palette.green, palette.amber, palette.blue, palette.deep][node.tone];
         const focusDistance = Math.hypot(x - focusX, y - focusY);
         const active = pointer.active && focusDistance < 280;
-        context.fillStyle = `rgba(${tone}, ${active ? 0.58 : 0.28})`;
+        context.fillStyle = `rgba(${tone}, ${active ? 0.72 : 0.42})`;
         context.beginPath();
         context.arc(x, y, active ? node.size + 1.5 : node.size, 0, Math.PI * 2);
         context.fill();
