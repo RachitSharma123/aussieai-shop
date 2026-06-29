@@ -637,13 +637,13 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-style: italic;
-  padding: 0 0.08em;
 }
 
 .hero h1 {
   font-size: clamp(2.6rem, 5.2vw, 5rem);
   max-width: 100%;
+  padding: 0.05em 0.12em;
+  line-height: 1.08;
 }
 
 .hero-actions {
