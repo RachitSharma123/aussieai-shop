@@ -554,7 +554,6 @@ a {
   min-height: 100vh;
   align-items: center;
   padding-top: 12rem;
-  overflow: clip;
   background:
     linear-gradient(135deg, rgba(255, 249, 236, 0.3), rgba(248, 246, 240, 0.36)),
     radial-gradient(circle at 16% 20%, rgba(46, 125, 99, 0.2), transparent 26rem),
