@@ -676,9 +676,10 @@ h3 {
 
 .lead {
   max-width: 720px;
-  margin: 1.45rem 0 0;
+  margin: 1.45rem auto 0;
   color: var(--muted);
   font-size: clamp(1.05rem, 1.65vw, 1.28rem);
+  text-align: center;
 }
 
 .section-copy,
@@ -1428,6 +1429,24 @@ h3 {
 
   .footer-inner {
     display: grid;
+  }
+
+  .ambient-orb {
+    width: 80vw;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .orb-one {
+    left: 0;
+  }
+
+  .orb-two {
+    right: 0;
+  }
+
+  .floating-objects {
+    overflow: hidden;
   }
 }
 
