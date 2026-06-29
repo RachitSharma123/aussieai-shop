@@ -639,10 +639,10 @@ h1 {
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 5.2vw, 5rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.8rem);
   max-width: 100%;
   padding: 0.05em 0.12em;
-  line-height: 1.08;
+  line-height: 1.1;
 }
 
 .hero-actions {
@@ -651,6 +651,14 @@ h1 {
 
 .hero-trust {
   justify-content: center;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.hero .eyebrow {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.2rem;
 }
 
 h2 {
