@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { inject } from '@vercel/analytics';
+inject();
 interface Props { title?: string; description?: string; canonical?: string; ogImage?: string; }
 const {
   title = 'Aussie AI: Custom AI Agents and Automation for Australian Businesses',
