@@ -632,6 +632,22 @@ h1 {
   font-size: clamp(3.2rem, 7.7vw, 6.75rem);
 }
 
+.h1-accent {
+  background: linear-gradient(135deg, var(--green), var(--amber));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.hero-actions {
+  justify-content: center;
+}
+
+.hero-trust {
+  justify-content: center;
+}
+
 h2 {
   max-width: 900px;
   margin-bottom: 1.1rem;

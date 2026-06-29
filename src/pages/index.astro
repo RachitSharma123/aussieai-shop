@@ -13,21 +13,12 @@ const schema = { '@context': 'https://schema.org', '@type': 'LocalBusiness', nam
   <main id="top">
     <section class="hero section ambient-section">
       <div class="ambient-orb orb-one"></div><div class="ambient-orb orb-two"></div><div class="ambient-grid"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow">Melbourne based, built for Australian businesses</p>
-          <h1>Scale Your Operations Without Scaling Your Team</h1>
-          <p class="lead">Aussie AI builds custom AI agents and automation systems that handle enquiries, missed calls, bookings, inboxes, follow ups and repetitive admin, built around the tools your business already uses.</p>
-          <div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a><a class="btn secondary" href="/services">See What We Build</a></div>
-          <div class="trust" aria-label="Trust points">{['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No technical knowledge required', 'Start small, scale later', 'Human handoff included'].map((t) => <span>{t}</span>)}</div>
-        </div>
-        <div class="dashboard-wrap reveal" data-parallax>
-          <div class="dashboard">
-            <div class="dash-top"><span></span><b>AI operations dashboard</b><em>Live workflow</em></div>
-            {dashboard.map(([d, detail], i) => <button class="dash-row" type="button" style={`--i:${i}`} data-dashboard-row data-detail={detail}><span class="pulse"></span><strong>{d}</strong><small>{i % 2 ? 'Reviewed' : 'Automated'}</small></button>)}
-            <div class="dash-insight" id="dashboardInsight">Select a workflow to see how it supports your team.</div>
-          </div>
-        </div>
+      <div class="container narrow reveal">
+        <p class="eyebrow">· Melbourne based · Built for Australian businesses ·</p>
+        <h1>Scale Your Operations <span class="h1-accent">Without Scaling Your Team</span></h1>
+        <p class="lead">Aussie AI builds custom AI agents and automation systems that handle enquiries, missed calls, bookings, inboxes, follow ups and repetitive admin, built around the tools your business already uses.</p>
+        <div class="actions hero-actions"><a class="btn primary" href="/contact">Book Free AI Audit</a><a class="btn secondary" href="/services">See What We Build</a></div>
+        <div class="trust hero-trust" aria-label="Trust points">{['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No technical knowledge required', 'Start small, scale later', 'Human handoff included'].map((t) => <span>{t}</span>)}</div>
       </div>
     </section>
 
