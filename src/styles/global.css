@@ -554,7 +554,7 @@ a {
   min-height: 100vh;
   align-items: center;
   padding-top: 12rem;
-  overflow: hidden;
+  overflow: clip;
   background:
     linear-gradient(135deg, rgba(255, 249, 236, 0.3), rgba(248, 246, 240, 0.36)),
     radial-gradient(circle at 16% 20%, rgba(46, 125, 99, 0.2), transparent 26rem),
@@ -638,6 +638,12 @@ h1 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-style: italic;
+  padding: 0 0.08em;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 5.2vw, 5rem);
+  max-width: 100%;
 }
 
 .hero-actions {
