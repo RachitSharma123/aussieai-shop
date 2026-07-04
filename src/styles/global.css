@@ -889,6 +889,10 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.bento.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .card {
   padding: 1.45rem;
   background: rgba(255, 255, 255, 0.86);
@@ -1301,6 +1305,7 @@ h3 {
   .bento,
   .bento.four,
   .bento.three,
+  .bento.two,
   .finder-options,
   .steps {
     grid-template-columns: 1fr 1fr;
@@ -1413,6 +1418,7 @@ h3 {
   .bento,
   .bento.four,
   .bento.three,
+  .bento.two,
   .finder-options,
   .steps {
     grid-template-columns: 1fr;
@@ -1505,6 +1511,55 @@ h3 {
   display: flex;
   justify-content: center;
   margin-top: 1.4rem;
+}
+
+.link-row {
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.65rem;
+  padding: 0.68rem 1rem;
+  border: 1px solid rgba(46, 125, 99, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--green-deep);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+}
+
+.check-list {
+  display: grid;
+  gap: 0.58rem;
+  list-style: none;
+  margin-top: 0.8rem;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 1.45rem;
+  color: var(--muted);
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 850;
+}
+
+.landing-summary {
+  align-items: stretch;
+}
+
+.landing-summary .card {
+  height: 100%;
 }
 
 .contact-trust {

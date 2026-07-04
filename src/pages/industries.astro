@@ -3,10 +3,28 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { industries } from '../data/site';
+import { industryLandingPages } from '../data/landing-pages';
+import { breadcrumbSchema, canonicalPath, serviceSchema } from '../data/seo';
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Industries', '/industries'],
+  ]),
+  ...industryLandingPages.map((page) => serviceSchema({
+    name: page.title,
+    description: page.description,
+    path: `/industries/${page.slug}`,
+    audience: page.eyebrow,
+  })),
+];
 ---
-<Base title="Industries: Aussie AI" description="AI automation for Australian tradies, cafes, clinics, NDIS providers, agencies and service businesses.">
+<Base title="AI Automation by Industry Australia | Aussie AI" description="AI automation ideas for Australian tradies, NDIS providers, clinics, cafes, agencies, consultants and local service businesses." canonical={canonicalPath('/industries')}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
   <Nav />
   <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Industries</p><h1>Built for the businesses Australia actually runs on.</h1><p class="lead">Every business has different admin pressure. Aussie AI helps find the workflows worth automating first.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container bento two">{industryLandingPages.map((page) => <article class="card industry-card reveal"><p class="eyebrow">Featured industry</p><h2>{page.title}</h2><p>{page.description}</p><a href={`/industries/${page.slug}`}>Learn more</a></article>)}</div></section>
   <section class="section"><div class="container bento three">{industries.map((item) => <article class="card industry-card reveal"><h3>{item.title}</h3><p><strong>Common problem:</strong> {item.problem}</p><p><strong>What can be automated:</strong> {item.automate}</p><p><strong>Business outcome:</strong> {item.outcome}</p><a href="/contact">Discuss automation</a></article>)}</div></section></main>
   <Footer />
 </Base>

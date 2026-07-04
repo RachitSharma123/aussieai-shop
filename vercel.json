@@ -1,1 +1,12 @@
-{ "buildCommand": "npm run build", "outputDirectory": "dist", "framework": "astro" }
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "astro",
+  "redirects": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "permanent": true
+    }
+  ]
+}

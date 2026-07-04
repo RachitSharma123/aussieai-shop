@@ -3,9 +3,15 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { toolCategories } from '../data/site';
+import { breadcrumbSchema, canonicalPath } from '../data/seo';
 const tools = ['Google Sheets','Airtable','Google Calendar','Gmail','Outlook','WhatsApp','SMS','Instagram','Facebook','HubSpot','GoHighLevel','Zapier','Make','n8n','Stripe','Xero','QuickBooks','Dashboards','Custom APIs'];
+const schema = breadcrumbSchema([
+  ['Home', '/'],
+  ['Integrations', '/integrations'],
+]);
 ---
-<Base title="Integrations: Aussie AI" description="Tools and systems Aussie AI can connect for Australian businesses.">
+<Base title="AI Automation Integrations Australia | Aussie AI" description="Connect websites, forms, email, calendars, CRMs, spreadsheets, SMS, reporting and business tools with Aussie AI automation." canonical={canonicalPath('/integrations')}>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /></Fragment>
   <Nav />
   <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Integrations</p><h1>Works with the tools you already use.</h1><p class="lead">Aussie AI connects the systems your business already relies on and makes them work together.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
   <section class="section"><div class="container bento three">{toolCategories.map(([title, copy]) => <article class="card reveal"><h3>{title}</h3><p>{copy}</p></article>)}</div></section>

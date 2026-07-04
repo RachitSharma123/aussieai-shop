@@ -1,11 +1,13 @@
 ---
 import '../styles/global.css';
-interface Props { title?: string; description?: string; canonical?: string; ogImage?: string; }
+import { seo } from '../data/seo';
+interface Props { title?: string; description?: string; canonical?: string; ogImage?: string; robots?: string; }
 const {
-  title = 'Aussie AI: Custom AI Agents and Automation for Australian Businesses',
-  description = 'Melbourne built AI agents and automation systems for Australian businesses that want faster replies, fewer missed leads, cleaner workflows, and less repetitive admin.',
+  title = 'Aussie AI | AI Agents and Automation for Australian Businesses',
+  description = seo.description,
   canonical = Astro.url.href,
-  ogImage = 'https://aussieai.shop/og-image.png',
+  ogImage = seo.ogImage,
+  robots = 'index, follow',
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -14,7 +16,7 @@ const {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content={robots} />
   <meta name="theme-color" content="#F8F6F0" />
   <link rel="canonical" href={canonical} />
   <meta property="og:type" content="website" />

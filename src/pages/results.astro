@@ -2,19 +2,24 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { outcomes, stats, testimonials } from '../data/site';
+import { outcomes, stats } from '../data/site';
+import { breadcrumbSchema, canonicalPath } from '../data/seo';
+const schema = breadcrumbSchema([
+  ['Home', '/'],
+  ['Results', '/results'],
+]);
 const scenarios = [
   { eyebrow: 'Scenario: Tradie on site', title: 'Missed call to captured job.', copy: 'A call comes in while the crew is on the tools. Within a minute the caller receives a text, an AI agent collects the job details and suburb, and a clean summary lands in the inbox ready to quote.' },
   { eyebrow: 'Scenario: After hours booking', title: 'Missed enquiry to booked appointment.', copy: 'A customer submits a form after hours. An AI agent replies, asks the right questions, captures the details, updates the CRM, adds a booking request and sends your team a clear summary for review.' },
   { eyebrow: 'Scenario: Busy clinic reception', title: 'Repeated questions to clear queue.', copy: 'The chat agent answers opening hours, pricing and appointment questions instantly. Reception only handles the conversations that actually need a person.' },
 ];
 ---
-<Base title="Results: Aussie AI" description="Business outcomes from practical AI agents and automation systems.">
+<Base title="AI Automation Outcomes for Small Business | Aussie AI" description="Practical outcomes Aussie AI designs for: faster lead response, fewer missed enquiries, cleaner handovers and less repetitive admin." canonical={canonicalPath('/results')}>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /></Fragment>
   <Nav />
   <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Results</p><h1>Designed around real business outcomes.</h1><p class="lead">No fake guarantees. We focus on faster response, cleaner workflows and less repetitive admin.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
   <section class="section stats-section"><div class="container stats-bar reveal">{stats.map(([num, label]) => <div class="stat"><strong>{num}</strong><span>{label}</span></div>)}</div></section>
   <section class="section"><div class="container bento three">{outcomes.map((outcome) => <article class="card reveal"><h3>{outcome}</h3><p>We design automations around practical improvements your team can understand and use.</p></article>)}</div><div class="container note-panel reveal"><p>Results depend on business type, enquiry volume, tools and workflow complexity.</p></div></section>
-  <section class="section"><div class="container section-head reveal"><p class="eyebrow">What businesses tell us</p><h2>Real workflows, real relief.</h2></div><div class="container bento three">{testimonials.map((t) => <article class="card testimonial reveal"><p class="quote">“{t.quote}”</p><p class="attribution"><strong>{t.name}</strong><span>{t.where}</span></p></article>)}</div></section>
   <section class="section"><div class="container section-head reveal"><p class="eyebrow">Example scenarios</p><h2>What automation looks like day to day.</h2></div><div class="container bento three">{scenarios.map((s) => <article class="card reveal"><p class="eyebrow">{s.eyebrow}</p><h3>{s.title}</h3><p>{s.copy}</p></article>)}</div><div class="container centre-actions"><a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a></div></section></main>
   <Footer />
 </Base>

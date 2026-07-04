@@ -3,10 +3,28 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { services } from '../data/site';
+import { serviceLandingPages } from '../data/landing-pages';
+import { breadcrumbSchema, canonicalPath, serviceSchema } from '../data/seo';
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Services', '/services'],
+  ]),
+  ...services.map((item) => serviceSchema({
+    name: item.title,
+    description: item.does,
+    path: '/services',
+    audience: item.bestFor,
+  })),
+];
 ---
-<Base title="Services: Aussie AI" description="AI agents and automation services for Australian businesses.">
+<Base title="AI Automation Services Australia | Aussie AI" description="AI chat agents, voice agents, AI receptionist, missed-call text back and workflow automation services for Australian small businesses." canonical={canonicalPath('/services')}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
   <Nav />
   <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Services</p><h1>AI agents that work inside your business.</h1><p class="lead">Aussie AI builds practical systems that respond, organise, update and hand over work inside the tools your team already uses.</p><div class="actions"><a class="btn primary" href="/contact">Book Free AI Audit</a></div></div></section>
+  <section class="section"><div class="container bento three">{serviceLandingPages.map((page) => <article class="card reveal"><p class="eyebrow">Featured service</p><h2>{page.title}</h2><p>{page.description}</p><a href={`/services/${page.slug}`}>Learn more</a></article>)}</div></section>
   <section class="section"><div class="container service-list">{services.map((item) => <article class="card service-detail reveal"><div><p class="eyebrow">Service</p><h2>{item.title}</h2><p>{item.does}</p></div><div class="detail-grid"><div><h3>Why it matters</h3><p>{item.matters}</p></div><div><h3>Example use cases</h3><ul>{item.useCases.map((useCase) => <li>{useCase}</li>)}</ul></div><div><h3>Best for</h3><p>{item.bestFor}</p></div></div><a class="btn secondary" href="/contact">Book Free AI Audit</a></article>)}</div></section></main>
   <Footer />
 </Base>

@@ -1,9 +1,11 @@
 .vercel
 node_modules/
 dist/
+.astro/
 .vercel/
 .env
 .env.local
 .env.*.local
 *.key
 *.pem
+.omx/

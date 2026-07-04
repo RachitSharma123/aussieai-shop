@@ -2,15 +2,18 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { services, industries, processSteps, dashboard, stats, testimonials, pricing, faqs } from '../data/site';
+import { services, industries, processSteps, stats, pricing, faqs } from '../data/site';
+import { serviceLandingPages, industryLandingPages } from '../data/landing-pages';
+import { businessSchema, canonicalPath, faqSchema } from '../data/seo';
 const topServices = services.slice(0, 4);
 const topIndustries = industries.slice(0, 6);
 const topFaqs = faqs.slice(0, 6);
-const schema = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: 'Aussie AI', url: 'https://aussieai.shop', description: 'Custom AI agents and automation systems for Australian businesses.', address: { '@type': 'PostalAddress', addressLocality: 'Melbourne', addressRegion: 'VIC', addressCountry: 'AU' }, areaServed: 'Australia' };
-const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+const schemas = [businessSchema(), faqSchema(topFaqs)];
 ---
-<Base>
-  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
+<Base title="Aussie AI | AI Agents and Automation for Australian Small Businesses" description="Melbourne-based AI agents, AI receptionist, missed-call text back and workflow automation for Australian small businesses." canonical={canonicalPath('/')}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
   <Nav />
   <main id="top">
     <section class="hero section ambient-section">
@@ -31,16 +34,13 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
     <section class="section" id="services">
       <div class="container section-head reveal"><p class="eyebrow">What Aussie AI does</p><h2>Practical AI agents for everyday operations.</h2><p class="section-copy">Start with one useful automation, then expand when the workflow proves value.</p></div>
       <div class="container bento four">{topServices.map((item) => <article class="card reveal"><h3>{item.title}</h3><p>{item.does}</p><a href="/services">View services</a></article>)}</div>
+      <div class="container centre-actions link-row">{serviceLandingPages.map((page) => <a class="pill-link" href={`/services/${page.slug}`}>{page.eyebrow}</a>)}</div>
     </section>
 
     <section class="section">
       <div class="container section-head reveal"><p class="eyebrow">Industries</p><h2>Built for the businesses Australia actually runs on.</h2></div>
       <div class="container bento three">{topIndustries.map((item) => <article class="card reveal"><h3>{item.title}</h3><p>{item.problem}</p><a href="/industries">Explore industries</a></article>)}</div>
-    </section>
-
-    <section class="section">
-      <div class="container section-head reveal"><p class="eyebrow">What businesses tell us</p><h2>Less chasing. More work booked in.</h2></div>
-      <div class="container bento three">{testimonials.map((t) => <article class="card testimonial reveal"><p class="quote">“{t.quote}”</p><p class="attribution"><strong>{t.name}</strong><span>{t.where}</span></p></article>)}</div>
+      <div class="container centre-actions link-row">{industryLandingPages.map((page) => <a class="pill-link" href={`/industries/${page.slug}`}>{page.eyebrow}</a>)}<a class="pill-link" href="/melbourne-ai-automation">Melbourne AI automation</a></div>
     </section>
 
     <section class="section">
@@ -65,10 +65,4 @@ const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEn
     <section class="section final-cta"><div class="container narrow reveal"><h2>Ready to see what AI can automate in your business?</h2><p>Book a free audit and we will map exactly where automation saves you time, before you spend a dollar.</p><a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a></div></section>
   </main>
   <Footer />
-  <script is:inline>
-    const dashboard = document.querySelector('[data-parallax]');
-    window.addEventListener('scroll', () => { if (!dashboard || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; dashboard.style.setProperty('--lift', `${Math.min(window.scrollY * 0.018, 16)}px`); }, { passive: true });
-    const insight = document.getElementById('dashboardInsight');
-    document.querySelectorAll('[data-dashboard-row]').forEach((row) => row.addEventListener('click', () => { document.querySelectorAll('[data-dashboard-row]').forEach((item) => item.classList.remove('active')); row.classList.add('active'); if (insight) insight.textContent = row.dataset.detail || ''; }));
-  </script>
 </Base>

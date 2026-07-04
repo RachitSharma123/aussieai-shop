@@ -2,8 +2,19 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath } from '../data/seo';
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Contact', '/contact'],
+  ]),
+  businessSchema(),
+];
 ---
-<Base title="Contact: Book a Free AI Audit" description="Book a free AI audit with Aussie AI in Melbourne.">
+<Base title="Book a Free AI Automation Audit | Aussie AI Melbourne" description="Contact Aussie AI to book a free AI automation audit for your Australian small business. Based in Melbourne and built around practical workflows." canonical={canonicalPath('/contact')}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
   <Nav />
   <main><section class="section page-hero"><div class="container narrow reveal"><p class="eyebrow">Contact</p><h1>Book your free AI audit.</h1><p class="lead">Tell us what is slowing your team down. We will show practical automation opportunities for your business.</p></div></section>
   <section class="section contact"><div class="container contact-grid"><div class="reveal"><p class="eyebrow">Free audit</p><h2>What happens after you submit?</h2><p>We review your note and reply with the simplest next step, with no pressure and no technical jargon.</p><div class="trust contact-trust">{['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No budget question', 'Human handoff included'].map((item) => <span>{item}</span>)}</div></div><form class="card form reveal" action="https://formspree.io/f/mpqopryb" method="POST"><input name="name" placeholder="Name" autocomplete="name" required /><input name="email" type="email" placeholder="Email" autocomplete="email" required /><input name="phone" type="tel" placeholder="Contact number" autocomplete="tel" /><textarea name="message" placeholder="Short note" rows="5" required></textarea><button class="btn primary" type="submit">Book Free AI Audit</button></form></div></section></main>

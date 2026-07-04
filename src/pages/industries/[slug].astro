@@ -1,0 +1,97 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { industryLandingPages } from '../../data/landing-pages';
+import { breadcrumbSchema, canonicalPath, faqSchema, serviceSchema } from '../../data/seo';
+
+export function getStaticPaths() {
+  return industryLandingPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Industries', '/industries'],
+    [page.title, `/industries/${page.slug}`],
+  ]),
+  serviceSchema({
+    name: page.title,
+    description: page.description,
+    path: `/industries/${page.slug}`,
+    audience: page.eyebrow,
+  }),
+  faqSchema(page.faqs),
+];
+---
+<Base title={page.metaTitle} description={page.description} canonical={canonicalPath(`/industries/${page.slug}`)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero">
+      <div class="container narrow reveal">
+        <p class="eyebrow">{page.eyebrow}</p>
+        <h1>{page.h1}</h1>
+        <p class="lead">{page.intro}</p>
+        <div class="actions">
+          <a class="btn primary" href="/contact">Book Free AI Audit</a>
+          <a class="btn secondary" href="/industries">View Industries</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container compare landing-compare">
+        <article class="card reveal danger">
+          <h2>Common bottlenecks</h2>
+          {page.problems.map((item) => <p><span>!</span>{item}</p>)}
+        </article>
+        <article class="card reveal success">
+          <h2>Useful automations</h2>
+          {page.automations.map((item) => <p><span>✓</span>{item}</p>)}
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container bento three">
+        {page.sections.map(([title, copy]) => <article class="card reveal"><h2>{title}</h2><p>{copy}</p></article>)}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Common questions</p>
+        <h2>Before automating this workflow.</h2>
+      </div>
+      <div class="container faq-list reveal">
+        {page.faqs.map(([question, answer]) => <details class="faq-item"><summary>{question}</summary><p>{answer}</p></details>)}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container section-head reveal">
+        <p class="eyebrow">Related pages</p>
+        <h2>Plan the next step.</h2>
+      </div>
+      <div class="container bento three">
+        {page.related.map(([label, href]) => <article class="card reveal"><h3>{label}</h3><a href={href}>Open page</a></article>)}
+      </div>
+    </section>
+
+    <section class="section final-cta">
+      <div class="container narrow reveal">
+        <h2>Want a practical automation map for your business?</h2>
+        <p>Book a free audit and we will show what should be automated first, what should stay human and what tools can connect.</p>
+        <a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

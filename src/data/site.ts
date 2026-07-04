@@ -75,15 +75,9 @@ export const dashboard = [
 
 export const stats = [
   ['24/7', 'Enquiries answered, even after hours'],
-  ['< 60 sec', 'Typical missed call text back time'],
+  ['Fast', 'Missed call text back workflows'],
   ['1–2 weeks', 'Most first automations live'],
   ['10+', 'Tools and platforms we connect'],
-];
-
-export const testimonials = [
-  { quote: 'We used to lose quote requests every time the crew was on the tools. Now every missed call gets a text back within a minute and the details land in our inbox ready to go.', name: 'Plumbing business owner', where: 'South East Melbourne' },
-  { quote: 'The booking enquiries that came in overnight used to sit until the next morning. The chat agent answers them straight away and we just confirm the booking.', name: 'Cafe owner', where: 'Melbourne CBD' },
-  { quote: 'Progress notes were eating hours every week. The draft notes are clean, consistent and our team just reviews and signs off.', name: 'NDIS provider coordinator', where: 'Victoria' },
 ];
 
 export const pricing = [
