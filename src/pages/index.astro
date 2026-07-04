@@ -2,13 +2,15 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { services, industries, processSteps, dashboard } from '../data/site';
+import { services, industries, processSteps, dashboard, stats, testimonials, pricing, faqs } from '../data/site';
 const topServices = services.slice(0, 4);
 const topIndustries = industries.slice(0, 6);
+const topFaqs = faqs.slice(0, 6);
 const schema = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: 'Aussie AI', url: 'https://aussieai.shop', description: 'Custom AI agents and automation systems for Australian businesses.', address: { '@type': 'PostalAddress', addressLocality: 'Melbourne', addressRegion: 'VIC', addressCountry: 'AU' }, areaServed: 'Australia' };
+const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
 <Base>
-  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /></Fragment>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(schema)} /><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
   <Nav />
   <main id="top">
     <section class="hero section ambient-section">
@@ -16,10 +18,14 @@ const schema = { '@context': 'https://schema.org', '@type': 'LocalBusiness', nam
       <div class="container narrow reveal">
         <p class="eyebrow">· Melbourne based · Built for Australian businesses ·</p>
         <h1>Scale Your Operations<br><span class="h1-accent">Without Scaling Your Team</span></h1>
-        <p class="lead">Custom AI agents that handle enquiries, missed calls, bookings and admin, built around the tools you already use.</p>
-        <div class="actions hero-actions"><a class="btn primary" href="/contact">Book Free AI Audit</a><a class="btn secondary" href="/services">See What We Build</a></div>
+        <p class="lead">Your phone rings while you're on the tools. A booking enquiry lands at 9pm. Aussie AI answers, captures the details and books it in, using the tools you already have.</p>
+        <div class="actions hero-actions"><a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a><a class="btn secondary" href="/services">See What We Build</a></div>
         <div class="trust hero-trust" aria-label="Trust points">{['Melbourne based', 'Built for Australian businesses', 'Works with existing tools', 'No technical knowledge required', 'Start small, scale later', 'Human handoff included'].map((t) => <span>{t}</span>)}</div>
       </div>
+    </section>
+
+    <section class="section stats-section">
+      <div class="container stats-bar reveal">{stats.map(([num, label]) => <div class="stat"><strong>{num}</strong><span>{label}</span></div>)}</div>
     </section>
 
     <section class="section" id="services">
@@ -33,14 +39,30 @@ const schema = { '@context': 'https://schema.org', '@type': 'LocalBusiness', nam
     </section>
 
     <section class="section">
-      <div class="container section-head reveal"><p class="eyebrow">Process</p><h2>Simple process. No tech overwhelm.</h2></div>
+      <div class="container section-head reveal"><p class="eyebrow">What businesses tell us</p><h2>Less chasing. More work booked in.</h2></div>
+      <div class="container bento three">{testimonials.map((t) => <article class="card testimonial reveal"><p class="quote">“{t.quote}”</p><p class="attribution"><strong>{t.name}</strong><span>{t.where}</span></p></article>)}</div>
+    </section>
+
+    <section class="section">
+      <div class="container section-head reveal"><p class="eyebrow">Process</p><h2>Simple process. No tech overwhelm.</h2><p class="section-copy">Most first automations are live within 1–2 weeks of the audit.</p></div>
       <div class="container steps preview-steps">{processSteps.slice(0, 3).map((step, i) => <article class="card step reveal"><span>Step {i + 1}</span><h3>{step.title}</h3><p>{step.happens}</p></article>)}</div>
       <div class="container centre-actions"><a class="btn secondary" href="/process">See the full process</a></div>
     </section>
 
-    <section class="section audit"><div class="container narrow reveal"><p class="eyebrow">Free audit first</p><h2>Every workflow is different.</h2><p>Some businesses need one simple automation. Others need a complete AI operations system across calls, inboxes, CRM, bookings and reporting. Aussie AI starts with a free audit so we can recommend the simplest solution that actually makes sense.</p><a class="btn primary" href="/contact">Book Free AI Audit</a></div></section>
+    <section class="section" id="pricing">
+      <div class="container section-head reveal"><p class="eyebrow">Pricing</p><h2>Start small. Pay for what you actually need.</h2><p class="section-copy">Indicative pricing so you know what to expect. Every quote is confirmed after your free audit.</p></div>
+      <div class="container bento three pricing-grid">{pricing.map((tier) => <article class={`card pricing-card reveal${tier.featured ? ' featured' : ''}`}>{tier.featured && <span class="pricing-badge">Most popular</span>}<h3>{tier.name}</h3><p class="price">{tier.price}</p><p class="price-period">{tier.period}</p><p class="pricing-blurb">{tier.blurb}</p><ul>{tier.includes.map((item) => <li>{item}</li>)}</ul><a class={`btn ${tier.featured ? 'primary' : 'secondary'}`} href="/contact">{tier.cta}</a></article>)}</div>
+    </section>
 
-    <section class="section final-cta"><div class="container narrow reveal"><h2>Ready to see what AI can automate in your business?</h2><p>Book a free AI audit and we will show you where Aussie AI can help you respond faster, capture more leads and reduce manual work.</p><a class="btn primary" href="/contact">Book Free AI Audit</a></div></section>
+    <section class="section audit"><div class="container narrow reveal"><p class="eyebrow">Free audit first</p><h2>Every workflow is different.</h2><p>Some businesses need one simple automation. Others need a complete AI operations system across calls, inboxes, CRM, bookings and reporting. Aussie AI starts with a free audit so we can recommend the simplest solution that actually makes sense.</p><a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a></div></section>
+
+    <section class="section" id="faq">
+      <div class="container section-head reveal"><p class="eyebrow">FAQ</p><h2>Straight answers before we talk.</h2></div>
+      <div class="container faq-list reveal">{topFaqs.map(([q, a]) => <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>)}</div>
+      <div class="container centre-actions"><a class="btn secondary" href="/faq">See all questions</a></div>
+    </section>
+
+    <section class="section final-cta"><div class="container narrow reveal"><h2>Ready to see what AI can automate in your business?</h2><p>Book a free audit and we will map exactly where automation saves you time, before you spend a dollar.</p><a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a></div></section>
   </main>
   <Footer />
   <script is:inline>

@@ -72,3 +72,22 @@ export const dashboard = [
   ['Google review reply drafted', 'New feedback is monitored and a professional reply is prepared.'],
   ['Workflow completed', 'The handover is clear and the next step is ready for your team.'],
 ];
+
+export const stats = [
+  ['24/7', 'Enquiries answered, even after hours'],
+  ['< 60 sec', 'Typical missed call text back time'],
+  ['1–2 weeks', 'Most first automations live'],
+  ['10+', 'Tools and platforms we connect'],
+];
+
+export const testimonials = [
+  { quote: 'We used to lose quote requests every time the crew was on the tools. Now every missed call gets a text back within a minute and the details land in our inbox ready to go.', name: 'Plumbing business owner', where: 'South East Melbourne' },
+  { quote: 'The booking enquiries that came in overnight used to sit until the next morning. The chat agent answers them straight away and we just confirm the booking.', name: 'Cafe owner', where: 'Melbourne CBD' },
+  { quote: 'Progress notes were eating hours every week. The draft notes are clean, consistent and our team just reviews and signs off.', name: 'NDIS provider coordinator', where: 'Victoria' },
+];
+
+export const pricing = [
+  { name: 'Starter Automation', price: 'From $490 setup', period: '+ from $99/month', blurb: 'One focused automation, live fast.', includes: ['Missed call text back or AI chat agent', 'Connected to your existing tools', 'Setup, testing and launch included', 'Email support'], cta: 'Start with one automation' },
+  { name: 'Growth System', price: 'From $1,490 setup', period: '+ from $249/month', blurb: 'Multiple agents working together.', includes: ['Chat, voice or inbox agents combined', 'CRM, calendar and workflow integration', 'Review booster and follow up flows', 'Monitoring, refinements and support'], featured: true, cta: 'Build my system' },
+  { name: 'Custom Build', price: 'Custom quote', period: 'After free audit', blurb: 'Full AI operations across your business.', includes: ['End to end workflow design', 'Custom website with AI built in', 'Multi-team and multi-location workflows', 'Priority support and ongoing improvement'], cta: 'Book a free audit' },
+];
