@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath, faqSchema } from '../../data/seo';
+
+const path = '/guides/best-ai-receptionist-australia';
+const title = '7 Best AI Receptionists in Australia (2026): Compared on ...';
+const description = 'We compare 7 AI receptionists for Australian businesses on real published prices, from $44+GST to $899+ managed. Honest best-for picks for 2026.';
+
+const faqs: [string, string][] = [["What is the best AI receptionist in Australia?", "There is no single best for every business. Johnni AI at $44+GST per month is the cheapest published AU-ready plan, Vereo at $79+GST is the value mid-tier pick, Hey Jodie at $99 suits appointment-driven businesses, and managed services at $299 to $899+ per month suit owners who want everything handled. Match the pick to your call volume and appetite for setup work."], ["How much does an AI phone answering service cost in Australia?", "Published Australian plans start at $44+GST to $99 per month for self-service software, metered services charge roughly $1.50 to $2.50 per answered call, and managed done-for-you setups run $299 to $899+ per month. One-off setup fees, where charged, typically run $0 to $500."], ["Do AI receptionists work with Australian phone numbers?", "The Australian-ready providers in this comparison do. The trap is offshore software advertised at around $49 a month: those plans are usually priced in USD and often lack Australian numbers, local accents and GST invoices. Before paying, confirm you can get a local number or port your existing one."], ["Can I try an AI receptionist before paying?", "Serious providers in this market offer a demo number or a trial. Call it yourself, at night, with an awkward request such as changing a booking. How the AI handles that one call tells you more than any feature list or comparison table."], ["Is a cheap AI receptionist better than a human virtual receptionist?", "On price, yes: human virtual receptionist services in Australia run $250 to $700+ per month, while AI plans start at $44+GST. On nuance, a human still handles complex or emotional calls better. Many businesses run a hybrid: AI for routine calls and overflow, humans for the conversations that need judgement."], ["What happens when I exceed my call allowance?", "Most subscription plans include a monthly call allowance and charge a lower excess rate for additional calls, while metered services simply bill per answered call. The details vary by provider, so ask for the excess rate in writing before signing up, and check whether short or wrong-number calls count."]];
+
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+    ['7 Best AI Receptionists in Australia (20', path],
+  ]),
+  businessSchema(),
+  faqSchema(faqs),
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero"><div class="container narrow reveal">
+      <p class="eyebrow">GUIDE</p>
+      <h1>7 Best AI Receptionists in Australia (2026): Compared on Real Prices</h1>
+      <p class="lead">We compare 7 AI receptionists for Australian businesses on real published prices, from $44+GST to $899+ managed. Honest best-for picks for 2026.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">Last updated November 2026</p>
+    </div></section>
+
+    <section class="section"><div class="container narrow reveal">
+      <h2>Quick answer: the 7 best AI receptionists in Australia</h2>
+      <p>For most Australian small businesses in 2026, the shortlist is: Johnni AI from $44+GST per month for the cheapest published AU-ready plan, LazyTradie from $49 per month for trades, Vereo from $79+GST for a stronger mid-tier plan, Hey Jodie from $99 per month for booking-heavy businesses, metered answering services at roughly $1.50 to $2.50 per call for low volumes, managed done-for-you setups at $299 to $899+ per month, and platform add-ons such as Aircall or RingCentral AI layers if you already run their phone system. There is no single winner: the best pick depends on your call volume, how much you want to configure yourself, and whether bookings need to flow into your calendar automatically.</p>
+
+      <h2>The comparison table: prices and best-for picks</h2>
+      <p>Here is the honest comparison for 2026. Johnni AI: $44+GST per month, best for budget-conscious businesses happy to self-serve. LazyTradie: from $49 per month, best for trades that want job and quote capture. Vereo: $79+GST per month, best value mid-tier plan. Hey Jodie: $99 per month, best for appointment-driven businesses. Aircall and RingCentral AI add-ons: priced with their calling plans, best if you already use the platform. Metered services: roughly $1.50 to $2.50 per answered call, best under about 300 calls a month. Managed done-for-you: $299 to $899+ per month, best for owners who want setup, training and monitoring handled for them.</p>
+
+      <h2>Johnni AI: cheapest published AU-ready plan</h2>
+      <p>Johnni AI publishes an entry AI plan at $44+GST per month, billed annually, which makes it the cheapest genuinely Australian-ready option we found in late 2026 research. It suits small businesses that know how to configure software themselves and want a real AI voice answering calls without paying for managed service. Check the included monthly call allowance before signing up, because entry plans across the market typically cap calls and charge for excess usage. Ask three questions: does it include an Australian number, does it connect to your calendar or CRM, and can you hear the voice in a demo first. If the answers are yes, the price is hard to beat.</p>
+
+      <h2>LazyTradie: the tradie specialist</h2>
+      <p>LazyTradie is aimed squarely at Australian trades, with published plans from $49 per month. The pitch is simple: capture every call that comes in while you are on the tools, take the caller's details and job request, and get the lead by text instead of losing it to voicemail. For plumbers, electricians and builders, a specialist matters because the AI needs to understand trade vocabulary and quote-style conversations, not just office bookings. Compare it against generalist providers on call allowance, after-hours handling and whether leads land in the job management tool you already use. If you are in the trades, shortlist it alongside the generalists above.</p>
+
+      <h2>Vereo: the value mid-tier pick</h2>
+      <p>Vereo publishes a starting AI plan at $79+GST per month. In our research it sat in the sensible middle of the Australian market: more headroom and polish than the cheapest entry plans, well under the managed-service price band. For businesses doing steady call volume, the jump from a $44 entry plan to $79 often buys a more generous call allowance or stronger integrations, so price per answered call can actually fall as you move up. Confirm exactly what the starting plan includes before you commit: call allowance, Australian number support, and whether calendar or CRM connections are included or charged as add-ons.</p>
+
+      <h2>Hey Jodie: best for appointment-driven businesses</h2>
+      <p>Hey Jodie publishes a starting plan at $99 per month and is a strong fit for businesses whose phone exists mainly to fill the calendar: clinics, salons, mobile services and consultancies. At this price point you should expect more than message-taking: the AI should check availability, book or reschedule appointments and send confirmations without your team touching anything. Judge it on the booking flow, not the demo voice. Call the trial number yourself with an awkward request, such as changing an existing booking, and see what happens. If appointments flow cleanly into your calendar system, the $99 is easy to justify against one recovered booking.</p>
+
+      <h2>Aircall and RingCentral AI: best if you already run the platform</h2>
+      <p>Aircall, RingCentral and similar phone platforms now sell AI receptionist layers on top of their calling plans. Pricing is typically bundled with the seat or calling plan rather than published as a standalone monthly figure, so get a written quote before comparing. The reason to consider them is simple: if your team already lives inside the platform, the AI answering layer connects to the same numbers, contacts and reporting you already use, with no new system to learn. The reason to be careful is lock-in: features priced attractively inside a bundle can cost more than a dedicated $44 to $99 Australian plan once you total the platform bill.</p>
+
+      <h2>Metered per-call services: best for low call volumes</h2>
+      <p>If your phone rings less than roughly 300 times a month, metered answering can undercut every subscription. Typical metered rates sit around $1.50 to $2.50 per answered call, so a quiet business doing 50 calls a month might spend $75 to $125 total, less than the cheapest subscription. The trade-off is predictability: one busy month can blow the budget, and per-call services vary in whether a 30-second wrong number counts. Businesses above roughly 300 calls a month almost always do better on a subscription with a bundled call allowance. Count a real month of calls, including missed and after-hours, before choosing this path.</p>
+
+      <h2>Managed done-for-you services: $299 to $899+ per month</h2>
+      <p>At the top of the market, Australian managed services charge $299 to $899+ per month and handle everything: setup, custom training on your business, integrations with your calendar, CRM or job management tools, and ongoing monitoring and tweaks. One-off setup fees for custom-trained agents typically run $0 to $500 depending on how much training data and workflow building is involved. This is the right pick when the owner has no time to configure software, or when calls are complex enough that a badly configured AI would do more harm than good. The honest downside: you pay several times the software-only price, so it must save several hours a month to justify itself.</p>
+
+      <h2>How to choose: the five checks that matter</h2>
+      <p>Whatever the price, run the same five checks before you commit. First, Australian number support: can you get a local number or port your existing one. Second, GST invoices: genuine Australian providers issue them; offshore services often cannot. Third, the call allowance: what happens when you exceed it, and what does an excess call cost. Fourth, booking integrations: do calls create bookings or leads in the tools you actually use. Fifth, trial availability: serious providers let you call a demo number or run a trial before paying. If a provider fails two of these checks, the headline price does not matter.</p>
+
+      <h2>How the maths compares to a human receptionist</h2>
+      <p>For context, a full-time receptionist in Australia costs roughly $65,000 to $75,000 a year plus superannuation, and human virtual receptionist services run $250 to $700+ per month, typically in per-call bundles. Even the most expensive managed AI setup at $899 a month is about $11,000 a year all-in, and entry software plans come in under $600 a year. The honest framing is not that AI replaces a great receptionist. It is that a large share of routine calls, such as hours, directions and booking requests, can be handled automatically, freeing your team for the conversations that genuinely need a human.</p>
+
+      <h2>FAQs</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What is the best AI receptionist in Australia?</summary><p>There is no single best for every business. Johnni AI at $44+GST per month is the cheapest published AU-ready plan, Vereo at $79+GST is the value mid-tier pick, Hey Jodie at $99 suits appointment-driven businesses, and managed services at $299 to $899+ per month suit owners who want everything handled. Match the pick to your call volume and appetite for setup work.</p></details>
+        <details class="faq-item"><summary>How much does an AI phone answering service cost in Australia?</summary><p>Published Australian plans start at $44+GST to $99 per month for self-service software, metered services charge roughly $1.50 to $2.50 per answered call, and managed done-for-you setups run $299 to $899+ per month. One-off setup fees, where charged, typically run $0 to $500.</p></details>
+        <details class="faq-item"><summary>Do AI receptionists work with Australian phone numbers?</summary><p>The Australian-ready providers in this comparison do. The trap is offshore software advertised at around $49 a month: those plans are usually priced in USD and often lack Australian numbers, local accents and GST invoices. Before paying, confirm you can get a local number or port your existing one.</p></details>
+        <details class="faq-item"><summary>Can I try an AI receptionist before paying?</summary><p>Serious providers in this market offer a demo number or a trial. Call it yourself, at night, with an awkward request such as changing a booking. How the AI handles that one call tells you more than any feature list or comparison table.</p></details>
+        <details class="faq-item"><summary>Is a cheap AI receptionist better than a human virtual receptionist?</summary><p>On price, yes: human virtual receptionist services in Australia run $250 to $700+ per month, while AI plans start at $44+GST. On nuance, a human still handles complex or emotional calls better. Many businesses run a hybrid: AI for routine calls and overflow, humans for the conversations that need judgement.</p></details>
+        <details class="faq-item"><summary>What happens when I exceed my call allowance?</summary><p>Most subscription plans include a monthly call allowance and charge a lower excess rate for additional calls, while metered services simply bill per answered call. The details vary by provider, so ask for the excess rate in writing before signing up, and check whether short or wrong-number calls count.</p></details>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid var(--line);border-radius:12px;">
+        <h2 style="margin-top:0;">Want this set up for your business?</h2>
+        <p style="margin-bottom:0;">We build and manage AI phone and workflow systems for Australian small businesses. <a class="btn primary" href="/contact">Book a free AI audit</a></p>
+      </div>
+
+      <h2>Read next</h2>
+      <ul><li><a href="/guides/ai-receptionist-cost-australia">/guides/ai-receptionist-cost-australia</a></li><li><a href="/services/ai-receptionist">/services/ai-receptionist</a></li></ul>
+    </div></section>
+  </main>
+  <Footer />
+</Base>
