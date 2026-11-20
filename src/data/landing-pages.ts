@@ -48,6 +48,7 @@ export const serviceLandingPages = [
       ['Will customers know it is automated?', 'We recommend being clear and practical so customers understand how their enquiry is being handled.'],
     ],
     related: [
+      ['What an AI receptionist costs in Australia', '/guides/ai-receptionist-cost-australia'],
       ['Missed call text back', '/services/missed-call-text-back'],
       ['Clinics and allied health', '/industries'],
       ['Contact Aussie AI', '/contact'],

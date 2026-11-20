@@ -1740,3 +1740,23 @@ h3 {
     font-size: 1.4rem;
   }
 }
+
+/* ===== Guides ===== */
+.guides-list { display: grid; gap: 1.25rem; }
+.guide-card {
+  display: block; padding: 1.5rem; border: 1px solid var(--line);
+  border-radius: 14px; text-decoration: none; color: inherit;
+  transition: border-color .2s ease, transform .2s ease; background: transparent;
+}
+.guide-card:hover { border-color: var(--green, #22c55e); transform: translateY(-2px); }
+.guide-card h2 { margin: .35rem 0 .5rem; font-size: 1.25rem; }
+.guide-card p { margin: 0 0 .75rem; opacity: .8; font-size: .95rem; }
+.guide-tag {
+  display: inline-block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+  opacity: .65; font-weight: 600;
+}
+.guide-date { font-size: .8rem; opacity: .55; }
+.table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+.table-wrap table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.table-wrap th, .table-wrap td { padding: .65rem .8rem; text-align: left; border-bottom: 1px solid var(--line); }
+.table-wrap th { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; opacity: .7; }

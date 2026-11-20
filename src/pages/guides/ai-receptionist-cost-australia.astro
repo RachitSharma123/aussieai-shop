@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath, faqSchema } from '../../data/seo';
+
+const path = '/guides/ai-receptionist-cost-australia';
+const title = 'AI Receptionist Cost in Australia (2026): Real Monthly Prices | Aussie AI';
+const description = 'What an AI receptionist really costs in Australia in 2026: monthly plans from $44 to $899+, per-call pricing, setup fees, and how the cost compares to a human receptionist.';
+
+const providers = [
+  { name: 'Johnni AI', price: '$44+GST/mo', note: 'billed annually, entry AI plan', },
+  { name: 'Vereo', price: '$79+GST/mo', note: 'published starting AI plan', },
+  { name: 'Hey Jodie', price: '$99/mo', note: 'published starting AI plan', },
+  { minuteRates: true, name: 'Per-call / per-minute services', price: '~$1.50-$2.50/call', note: 'typical metered answering, costs scale with volume', },
+  { name: 'Managed done-for-you (AU)', price: '$299-$899+/mo', note: 'setup, custom training, integrations included', },
+  { name: 'Human virtual receptionist', price: '$250-$700+/mo', note: 'call-centre staff, typically per-call bundles', },
+];
+
+const faqs: [string, string][] = [
+  ['How much does an AI receptionist cost in Australia?',
+   'In 2026, published Australian AI receptionist plans start at $44-$99 per month for self-service software, while managed done-for-you setups run $299-$899+ per month. Per-call metered services typically charge $1.50-$2.50 per answered call.'],
+  ['Why are some AI receptionists advertised at $49 USD?',
+   'Most ultra-cheap plans you see advertised are US-based services priced in USD, without Australian number support, local accents or GST invoices. Australian-focused providers charge more because they include local numbers, AU voice options and local support.'],
+  ['What drives the price up or down?',
+   'Call volume, integration depth (calendar, CRM, job management tools), number of numbers, voice quality, and whether you want a managed setup or self-service software. Setup fees for custom-trained agents typically run $0-$500 one-off.'],
+  ['Is an AI receptionist cheaper than a human receptionist?',
+   'Yes, by a wide margin. A full-time receptionist in Australia costs roughly $65,000-$75,000 a year plus super. Even a top-tier managed AI receptionist at $899/mo is about $11,000 a year, and entry software plans are under $600 a year.'],
+  ['Do I pay per call or per month?',
+   'Both models exist. Subscription plans include a monthly call allowance with excess calls charged cheaply. Metered services charge per answered call. Businesses over roughly 300 calls a month almost always do better on a subscription.'],
+  ['What should I check before signing up?',
+   'Whether the provider supplies Australian phone numbers, how calls hand off to your team, what happens after hours, data residency under the Privacy Act, and whether you can hear a demo of the actual voice before paying.'],
+];
+
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+    ['AI Receptionist Cost Australia', path],
+  ]),
+  businessSchema(),
+  faqSchema(faqs),
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero"><div class="container narrow reveal">
+      <p class="eyebrow">GUIDE</p>
+      <h1>AI Receptionist Cost in Australia (2026)</h1>
+      <p class="lead">Real prices from published Australian plans, per-call rates and managed setups, so you know what you will actually pay before you talk to anyone.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">Last updated November 2026 · 6 min read</p>
+    </div></section>
+
+    <section class="section"><div class="container narrow reveal">
+      <h2>Quick answer</h2>
+      <p>If you want a number now: <strong>self-service AI receptionist software starts at $44-$99+GST per month</strong> in Australia, while <strong>managed done-for-you services run $299-$899+ per month</strong>. Metered per-call answering sits around <strong>$1.50-$2.50 per answered call</strong>. Almost every provider prices this way in 2026, and the gap between cheap software and managed service is the difference between configuring it yourself versus having someone build, train and monitor it for you.</p>
+      <p>One reality check worth knowing up front: the "$49/month AI receptionist" ads you see are mostly US services priced in USD. They often lack Australian numbers, local accents and GST invoices. Genuine Australian-ready plans cost more, and the table below shows what is actually published.</p>
+
+      <h2>What Australian providers charge (published prices)</h2>
+      <p>These are starting prices pulled from providers' own pages in late 2026. Most scale up with call volume and features.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Provider / model</th><th>Starting price</th><th>What you get</th></tr></thead>
+          <tbody>
+            {providers.map((p) => (
+              <tr><td><strong>{p.name}</strong></td><td>{p.price}</td><td>{p.note}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.85rem;opacity:0.7;">Prices are indicative, from providers' published pages as at November 2026. Confirm current pricing directly.</p>
+
+      <h2>Per-call vs monthly: which is cheaper for you</h2>
+      <p>Do the maths for your call volume before choosing a model. Suppose you take 150 calls a month. At $2 per call, metered answering costs you $300/month. A $99 subscription that includes 200 calls is obviously cheaper. Flip it around: 40 calls a month on metered is $80, under most subscriptions, but one burst of after-hours calls can flip that back.</p>
+      <p>The break-even sits around <strong>50-100 calls a month</strong> for most plans. Above that, subscriptions win. Below that, metered can be cheaper, but you pay for every spike.</p>
+
+      <h2>Setup fees and hidden costs</h2>
+      <p>Three costs catch people out. First, <strong>setup fees</strong>: custom-trained agents typically run $0-$500 one-off, depending on how much of your business logic the provider has to build. Second, <strong>telephony</strong>: Australian phone numbers are usually cheap ($5-$15/month) but porting an existing number or adding toll-free numbers costs more. Third, <strong>overage</strong>: plans include a call allowance, and excess calls are charged per call or push you up a tier. Ask each provider for the overage rate before signing, not after.</p>
+
+      <h2>AI receptionist vs human receptionist: the real cost gap</h2>
+      <p>A full-time receptionist in Australia costs roughly <strong>$65,000-$75,000 a year</strong> plus superannuation, leave and desk costs. Even the most expensive managed AI receptionist at $899/month is about $11,000 a year all-in. Entry-level software is under $600 a year. The honest framing is not that AI replaces a great receptionist: it is that for the 60-70% of calls that are routine (hours, directions, booking, "can I get a quote"), an AI receptionist handles them at a fraction of the cost, and your team handles the calls that actually need a human.</p>
+
+      <h2>What you should get for your money</h2>
+      <ul>
+        <li><strong>An Australian phone number</strong> included or cheaply added, with the option to port your existing one.</li>
+        <li><strong>Natural voice quality</strong> with an Australian or neutral accent you can hear in a demo before paying.</li>
+        <li><strong>Booking and CRM integration</strong>: calls should create bookings or leads in your calendar, job management tool or CRM automatically, not just transcriptions in a dashboard.</li>
+        <li><strong>After-hours behaviour you control</strong>: what the AI says, when it hands off, and how urgent calls reach a human.</li>
+        <li><strong>Data handling that fits the Privacy Act</strong>: where call recordings and transcripts are stored, and how long they are kept.</li>
+        <li><strong>A transcript and summary of every call</strong>, delivered to your inbox or tools, so nothing is lost when the AI hands off.</li>
+      </ul>
+
+      <h2>How to choose in 3 steps</h2>
+      <ol>
+        <li><strong>Count your calls</strong> over a typical month, including missed and after-hours. That single number decides metered vs subscription faster than any feature list.</li>
+        <li><strong>Decide who builds it</strong>: if you or someone on your team enjoys configuring software, self-service plans from $44/month work. If you want it done for you and monitored, budget $299-$899/month managed.</li>
+        <li><strong>Test with real calls</strong>: every serious provider offers a demo or trial. Call the demo number yourself, at night, with an awkward request. That tells you more than any comparison table.</li>
+      </ol>
+
+      <h2>FAQs</h2>
+      <div class="faq-list">
+        {faqs.map(([q, a]) => <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>)}
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid var(--line);border-radius:12px;">
+        <h2 style="margin-top:0;">Want a live demo on your own number?</h2>
+        <p style="margin-bottom:0;">We build and manage AI receptionists for Australian small businesses, with local numbers, booking integration and human handoff. <a class="btn primary" href="/contact">Book a free AI audit</a></p>
+      </div>
+    </div></section>
+  </main>
+  <Footer />
+</Base>

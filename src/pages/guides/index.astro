@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { breadcrumbSchema, canonicalPath } from '../../data/seo';
+
+const path = '/guides';
+const title = 'Guides: AI Automation for Australian Small Business | Aussie AI';
+const description = 'Practical guides on AI receptionists, call answering costs and workflow automation for Australian small businesses.';
+
+const guides = [
+  {
+    title: 'AI Receptionist Cost in Australia (2026)',
+    desc: 'Real monthly prices, per-call rates, setup fees and how AI compares to a human receptionist.',
+    href: '/guides/ai-receptionist-cost-australia',
+    date: 'November 2026',
+    tag: 'Pricing',
+  },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+  ]),
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero"><div class="container narrow reveal">
+      <p class="eyebrow">GUIDES</p>
+      <h1>Guides</h1>
+      <p class="lead">No-fluff guides on what AI automation really costs and how it works for Australian small businesses.</p>
+    </div></section>
+    <section class="section"><div class="container narrow reveal">
+      <div class="guides-list">
+        {guides.map((g) => (
+          <a class="guide-card" href={g.href}>
+            <span class="guide-tag">{g.tag}</span>
+            <h2>{g.title}</h2>
+            <p>{g.desc}</p>
+            <span class="guide-date">{g.date}</span>
+          </a>
+        ))}
+      </div>
+    </div></section>
+  </main>
+  <Footer />
+</Base>
