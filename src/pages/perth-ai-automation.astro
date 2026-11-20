@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath, serviceSchema } from '../data/seo';
+
+const path = '/perth-ai-automation';
+const title = 'Perth AI Automation for Small Businesses | Aussie AI';
+const description = 'AI and workflow automation for Perth small businesses that want faster lead response and less repetitive admin.';
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Perth AI Automation', path],
+  ]),
+  businessSchema(),
+  serviceSchema({
+    name: 'Perth AI automation for small businesses',
+    description,
+    path,
+    audience: 'Perth small businesses',
+  }),
+];
+
+const localServices = [
+  ['Missed call text back', 'Reply to missed callers, collect details and send your team a clean summary.', '/services/missed-call-text-back'],
+  ['AI receptionist', 'Handle common enquiries, intake and booking requests with clear human handoff.', '/services/ai-receptionist'],
+  ['Workflow automation', 'Connect forms, inboxes, calendars, CRMs and spreadsheets so updates move automatically.', '/services/workflow-automation'],
+];
+
+const fit = [
+  'Perth service businesses that need faster lead response',
+  'Trades and home services teams working across the Perth metro area',
+  'Clinics, allied health and NDIS providers with repeated admin',
+  'Agencies and consultants managing enquiries across several tools',
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Perth AI automation</p>
+        <h1>Practical AI agents for Perth small businesses.</h1>
+        <p class="lead">Aussie AI builds automation for Perth businesses that want faster replies, cleaner handovers and less repetitive admin without a complicated software rebuild. Every system is built around how your team already works.</p>
+        <div class="actions">
+          <a class="btn primary" href="/contact">Book Free AI Audit</a>
+          <a class="btn secondary" href="/services">View Services</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container bento three">
+        {localServices.map(([name, copy, href]) => <article class="card reveal"><h2>{name}</h2><p>{copy}</p><a href={href}>Learn more</a></article>)}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container detail-grid landing-summary">
+        <article class="card reveal">
+          <p class="eyebrow">Good fit</p>
+          <ul class="check-list">{fit.map((item) => <li>{item}</li>)}</ul>
+        </article>
+        <article class="card reveal">
+          <p class="eyebrow">Approach</p>
+          <h2>Start with the workflow.</h2>
+          <p>We review how leads, bookings, admin and follow up move today, then recommend the smallest useful automation first.</p>
+        </article>
+        <article class="card reveal">
+          <p class="eyebrow">Local context</p>
+          <h2>Built for Perth businesses.</h2>
+          <p>From trades teams across the Perth metro area to clinics and agencies in the CBD, the copy, handover rules and customer experience are written for Australian businesses and customers.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section audit">
+      <div class="container narrow reveal">
+        <p class="eyebrow">Free audit first</p>
+        <h2>Map the highest-value automation before you build.</h2>
+        <p>Tell us where admin, missed enquiries or manual updates slow the business down. We will identify what can be automated, what should stay human and what tools need to connect.</p>
+        <a class="btn primary" href="/contact">Get Your Free Automation Blueprint</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
