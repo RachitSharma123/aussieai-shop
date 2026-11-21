@@ -5,7 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { breadcrumbSchema, businessSchema, canonicalPath, faqSchema } from '../../data/seo';
 
 const path = '/guides/best-ai-receptionist-australia';
-const title = '7 Best AI Receptionists in Australia (2026): Compared on ...';
+const title = '7 Best AI Receptionists in Australia (2026)';
 const description = 'We compare 7 AI receptionists for Australian businesses on real published prices, from $44+GST to $899+ managed. Honest best-for picks for 2026.';
 
 const faqs: [string, string][] = [["What is the best AI receptionist in Australia?", "There is no single best for every business. Johnni AI at $44+GST per month is the cheapest published AU-ready plan, Vereo at $79+GST is the value mid-tier pick, Hey Jodie at $99 suits appointment-driven businesses, and managed services at $299 to $899+ per month suit owners who want everything handled. Match the pick to your call volume and appetite for setup work."], ["How much does an AI phone answering service cost in Australia?", "Published Australian plans start at $44+GST to $99 per month for self-service software, metered services charge roughly $1.50 to $2.50 per answered call, and managed done-for-you setups run $299 to $899+ per month. One-off setup fees, where charged, typically run $0 to $500."], ["Do AI receptionists work with Australian phone numbers?", "The Australian-ready providers in this comparison do. The trap is offshore software advertised at around $49 a month: those plans are usually priced in USD and often lack Australian numbers, local accents and GST invoices. Before paying, confirm you can get a local number or port your existing one."], ["Can I try an AI receptionist before paying?", "Serious providers in this market offer a demo number or a trial. Call it yourself, at night, with an awkward request such as changing a booking. How the AI handles that one call tells you more than any feature list or comparison table."], ["Is a cheap AI receptionist better than a human virtual receptionist?", "On price, yes: human virtual receptionist services in Australia run $250 to $700+ per month, while AI plans start at $44+GST. On nuance, a human still handles complex or emotional calls better. Many businesses run a hybrid: AI for routine calls and overflow, humans for the conversations that need judgement."], ["What happens when I exceed my call allowance?", "Most subscription plans include a monthly call allowance and charge a lower excess rate for additional calls, while metered services simply bill per answered call. The details vary by provider, so ask for the excess rate in writing before signing up, and check whether short or wrong-number calls count."]];
@@ -14,7 +14,7 @@ const schemas = [
   breadcrumbSchema([
     ['Home', '/'],
     ['Guides', '/guides'],
-    ['7 Best AI Receptionists in Australia (20', path],
+    [title, path],
   ]),
   businessSchema(),
   faqSchema(faqs),
