@@ -7,7 +7,6 @@ Crawl-delay: 1
 
 # ============================================
 # AI answer engines: ALLOWED (search + citations)
-# These are user-facing search crawlers, not training scrapers
 # ============================================
 
 User-agent: OAI-SearchBot
@@ -29,29 +28,31 @@ User-agent: Claude-User
 Allow: /
 
 # ============================================
-# AI training scrapers: BLOCKED
+# AI training crawlers: ALLOWED
+# Owner opted in (2026-11-23). Site content may
+# be used for AI model training.
 # ============================================
 
 User-agent: GPTBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 User-agent: omgili
-Disallow: /
+Allow: /
 
 User-agent: Bytespider
-Disallow: /
+Allow: /
 
 # Sitemap
 Sitemap: https://aussieai.shop/sitemap-index.xml
