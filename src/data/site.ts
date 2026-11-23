@@ -60,6 +60,12 @@ export const faqs = [
   ['Do you maintain the system after launch?', 'Yes. Support, monitoring, refinements and improvements can be included after launch.'],
   ['How do we get started?', 'Book a free AI audit. We will review your workflow and show the simplest path forward.'],
   ['Why is there no public pricing?', 'Every workflow is different, so we start with an audit before recommending the right solution.'],
+  ['How much does AI automation cost for a small business in Australia?', 'Starter automations begin at $490 setup plus from $99 per month, and multi-agent Growth Systems begin at $1,490 setup plus from $249 per month. Exact pricing is confirmed after a free AI audit, so you only pay for the workflows that will actually save your team time.'],
+  ['What is missed call text back?', 'Missed call text back automatically sends an SMS to any caller you could not answer, collects their details and books the job or hands it to your team. It is the fastest way to stop losing leads to competitors when the phone is busy or after hours.'],
+  ['Do you work with businesses outside Melbourne?', 'Yes. Aussie AI is Melbourne-based and works with small businesses across Sydney, Brisbane, Perth, the Gold Coast, Adelaide, Canberra and regional Australia. Builds are done remotely with clear handover, so location does not slow anything down.'],
+  ['How long does it take to set up an AI receptionist or voice agent?', 'Most first automations, including AI receptionists and missed call text back, go live within 1 to 2 weeks of the free audit. That includes scripting, testing with real scenarios, human handoff rules and launch.'],
+  ['Is AI automation worth it for tradies and home services?', 'Yes. Trades businesses miss a large share of calls while on tools, and each missed call is a lost job. AI receptionists answer every call, qualify the job and text back missed callers, which is why tradies are one of the best fits for a starter automation.'],
+  ['Which tools and platforms do you connect with?', 'We commonly connect calendars, CRMs, forms, spreadsheets, inboxes, SMS and workflow tools such as HubSpot, Google Workspace, Microsoft 365, Zapier, Make and n8n. See the integrations page for the full list.'],
 ];
 
 export const dashboard = [
