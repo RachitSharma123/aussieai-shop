@@ -41,8 +41,20 @@ export function businessSchema() {
       addressRegion: 'VIC',
       addressCountry: 'AU',
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: -37.8136,
+      longitude: 144.9631,
+    },
+    priceRange: '$$',
     areaServed: [
       { '@type': 'City', name: 'Melbourne' },
+      { '@type': 'City', name: 'Sydney' },
+      { '@type': 'City', name: 'Brisbane' },
+      { '@type': 'City', name: 'Perth' },
+      { '@type': 'City', name: 'Gold Coast' },
+      { '@type': 'City', name: 'Adelaide' },
+      { '@type': 'City', name: 'Canberra' },
       { '@type': 'Country', name: 'Australia' },
     ],
     knowsAbout: [
