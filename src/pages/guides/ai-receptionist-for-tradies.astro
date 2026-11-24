@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath, faqSchema } from '../../data/seo';
+
+const path = '/guides/ai-receptionist-for-tradies';
+const title = 'AI Receptionist for Tradies';
+const description = 'AI receptionist for tradies: costs from $49 a month, why a $1,300 average job makes missed calls expensive, and how LazyTradie and rivals compare in 2026.';
+
+const faqs: [string, string][] = [["How much does an AI receptionist for tradies cost?", "Entry pricing is low: LazyTradie starts from $49 a month. tradieassistant.ai, ReceptFlow and TradePA structure their plans differently, often around call volume or features, so compare cost per captured job rather than headline price alone. Against an average trade job of around $1,300, a service that captures one extra job each month repays even a premium plan comfortably."], ["Can an AI receptionist book jobs into ServiceM8 or SimPRO?", "The better services can, and this should be a deciding factor. Look for native integration that creates a job in your queue with the caller's name, number, address, job description and urgency attached. Ask each provider to demonstrate the flow live, and confirm it works without manual retyping, email forwarding or spreadsheet workarounds."], ["What happens to calls that come in after hours?", "A capable AI receptionist answers instantly at any hour, captures the caller's details and job description, books routine work into your calendar for the morning and flags genuine emergencies for immediate escalation. This matters because after-hours callers who reach a helpful voice become booked jobs, while voicemail callers usually ring the next business on the list."], ["Will my customers know they are speaking to an AI?", "Modern services use natural voices, but quality varies between providers, so the only reliable test is first hand. Call each demo line yourself at night, on a noisy street if possible, and judge whether the conversation would reassure a customer. Keep the provider you would be happy to have answering your own phone."], ["Is an AI receptionist worth it for a solo tradie?", "The maths favours it. You cannot answer the phone while on a roof or under a house, and the average trade job sits around $1,300 with roughly 23 per cent of calls becoming booked work. An entry plan from $49 a month that captures even one extra job pays for itself many times over, which makes the decision low risk for solo operators."]];
+
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+    [title, path],
+  ]),
+  businessSchema(),
+  faqSchema(faqs),
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero"><div class="container narrow reveal">
+      <p class="eyebrow">GUIDE</p>
+      <h1>AI Receptionist for Tradies: What It Costs and Who's Best (2026)</h1>
+      <p class="lead">AI receptionist for tradies: costs from $49 a month, why a $1,300 average job makes missed calls expensive, and how LazyTradie and rivals compare in 2026.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">Last updated November 2026</p>
+    </div></section>
+
+    <section class="section"><div class="container narrow reveal">
+      <h2>Why missed calls cost tradies real money</h2>
+      <p>Tradies work on tools, not on the phone. When a job comes in and nobody picks up, the caller usually rings the next business on the list. The economics make the stakes clear: the average trade job is worth around $1,300, and only about 23 per cent of calls turn into booked work. That means every unanswered call carries a realistic chance of losing a four figure job, and a handful of missed calls each week quietly compounds into serious lost revenue before you notice anything has gone wrong.</p>
+
+      <h2>What an AI receptionist actually does</h2>
+      <p>An AI receptionist for tradies answers every call with a natural voice, captures the caller's name, number and job details, answers common questions, and passes qualified leads straight to your calendar or job system. Unlike a generic call centre, a tradie focused service understands the difference between an emergency burst pipe and a quote request for a renovation, and routes them differently. It works around your day: it picks up while you are on a roof, under a house or driving between jobs, so you never have to stop work to answer the phone yourself.</p>
+
+      <h2>What an AI receptionist costs in 2026</h2>
+      <p>Pricing in this niche starts low. LazyTradie starts from $49 a month, which positions it as an entry point for solo operators and small crews. Competitors such as tradieassistant.ai, ReceptFlow and TradePA structure their plans differently, often scaling with call volume or features, so the right comparison is not sticker price alone but cost per captured job. Hold any plan against the numbers above: if a service captures a single extra job worth around $1,300, it has repaid the entry level fee many times over in the first month.</p>
+
+      <h2>Who the main providers are</h2>
+      <p>The market now has several purpose built options. LazyTradie is the price leader with plans from $49 a month. tradieassistant.ai positions itself specifically around trade businesses. ReceptFlow and TradePA compete on service depth and workflow fit. There is no single winner for every business: a solo plumber with light call volume needs something different from a busy electrical outfit running scheduled maintenance. Work through the what to check list below, shortlist two services, and trial them against your real call traffic before committing to a longer term.</p>
+
+      <h2>Plumber answering service: what matters</h2>
+      <p>For plumbers, urgency drives everything. A burst pipe or a backed up sewer cannot wait until tomorrow, so a plumber answering service has to triage emergencies on the spot and log routine work for normal hours. The AI should capture the exact fault, the property address and the urgency level, then either book the job or flag it as priority. Set this against the benchmark above: with average trade jobs around $1,300, one captured after-hours emergency call can cover several months of a $49 entry plan. Ask every provider exactly how it handles emergency triage.</p>
+
+      <h2>Electrician answering service Australia: what matters</h2>
+      <p>Electricians receive a different call mix. Safety issues such as power outages and switchboard faults sit alongside planned work like lighting upgrades and compliance checks, so an electrician answering service in Australia needs to separate urgent hazards from quote requests and route each correctly. It should also capture fault details accurately and sound natural to Australian callers, because callers hang up quickly when a voice feels wrong. Test this yourself: ring each provider's demo line after dark and judge whether you would trust that conversation to represent your business to a customer.</p>
+
+      <h2>ServiceM8 and SimPRO integration</h2>
+      <p>Integration is where the value compounds. If you run ServiceM8, the AI receptionist should create a job directly in your queue with the caller's details attached, so nothing gets retyped at the end of a long day. SimPRO users should expect the same: call data flowing into the job record without manual entry. Before buying, confirm the integration is native rather than a workaround involving email forwarding or spreadsheets, and ask exactly which fields are captured. Name, number, address, job description and urgency are the minimum that should land in your system automatically.</p>
+
+      <h2>After-hours capture is where the money is</h2>
+      <p>Most trade calls arrive while you are working, and many more come after hours when nobody can answer. That second window is where an AI receptionist earns its fee, because a caller who reaches a capable voice at 8pm becomes a booked job instead of a voicemail nobody checks until the next day. When comparing services, ask what happens after hours specifically: does the AI answer instantly, does it place bookings straight into your calendar for the morning, and can it flag emergencies for immediate escalation? A service that only takes messages after dark delivers half the value.</p>
+
+      <h2>What to check before you sign</h2>
+      <p>Run this checklist against any provider, including LazyTradie, tradieassistant.ai, ReceptFlow and TradePA. First, call the demo line yourself at night and judge the voice and accuracy. Second, confirm ServiceM8 or SimPRO integration matches your actual workflow. Third, check how pricing scales with call volume so a busy month holds no surprises. Fourth, verify the AI captures name, number, address and job details on a noisy worksite style call. Fifth, test emergency handling for your specific trade. Sixth, confirm you can cancel month to month rather than lock into a yearly contract.</p>
+
+      <h2>So who is best for your trade business?</h2>
+      <p>There is no universal answer, only a fit decision. If you want the lowest commitment entry point, LazyTradie with plans from $49 a month is the obvious starting line. If you want a service built purely around trade businesses, evaluate tradieassistant.ai alongside it. If depth of ServiceM8 or SimPRO integration matters most, score ReceptFlow and TradePA on integration quality. Whichever you choose, measure results for a full month: track calls answered, jobs booked and revenue captured, then keep the service that books real work rather than the one with the best brochure.</p>
+
+      <h2>FAQs</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>How much does an AI receptionist for tradies cost?</summary><p>Entry pricing is low: LazyTradie starts from $49 a month. tradieassistant.ai, ReceptFlow and TradePA structure their plans differently, often around call volume or features, so compare cost per captured job rather than headline price alone. Against an average trade job of around $1,300, a service that captures one extra job each month repays even a premium plan comfortably.</p></details>
+        <details class="faq-item"><summary>Can an AI receptionist book jobs into ServiceM8 or SimPRO?</summary><p>The better services can, and this should be a deciding factor. Look for native integration that creates a job in your queue with the caller\'s name, number, address, job description and urgency attached. Ask each provider to demonstrate the flow live, and confirm it works without manual retyping, email forwarding or spreadsheet workarounds.</p></details>
+        <details class="faq-item"><summary>What happens to calls that come in after hours?</summary><p>A capable AI receptionist answers instantly at any hour, captures the caller\'s details and job description, books routine work into your calendar for the morning and flags genuine emergencies for immediate escalation. This matters because after-hours callers who reach a helpful voice become booked jobs, while voicemail callers usually ring the next business on the list.</p></details>
+        <details class="faq-item"><summary>Will my customers know they are speaking to an AI?</summary><p>Modern services use natural voices, but quality varies between providers, so the only reliable test is first hand. Call each demo line yourself at night, on a noisy street if possible, and judge whether the conversation would reassure a customer. Keep the provider you would be happy to have answering your own phone.</p></details>
+        <details class="faq-item"><summary>Is an AI receptionist worth it for a solo tradie?</summary><p>The maths favours it. You cannot answer the phone while on a roof or under a house, and the average trade job sits around $1,300 with roughly 23 per cent of calls becoming booked work. An entry plan from $49 a month that captures even one extra job pays for itself many times over, which makes the decision low risk for solo operators.</p></details>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid var(--line);border-radius:12px;">
+        <h2 style="margin-top:0;">Want this set up for your business?</h2>
+        <p style="margin-bottom:0;">We build and manage AI phone and workflow systems for Australian small businesses. <a class="btn primary" href="/contact">Book a free AI audit</a></p>
+      </div>
+
+      <h2>Read next</h2>
+      <ul><li><a href="/industries/tradies">/industries/tradies</a></li><li><a href="/guides/ai-receptionist-cost-australia">/guides/ai-receptionist-cost-australia</a></li></ul>
+    </div></section>
+  </main>
+  <Footer />
+</Base>
