@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath, faqSchema } from '../../data/seo';
+
+const path = '/guides/missed-call-statistics-australia';
+const title = 'Missed Call Statistics Australia';
+const description = 'Missed call statistics Australia: 20 to 40 percent of calls missed in hours, near 100 percent after hours, and the callback conversion curve explained.';
+
+const faqs: [string, string][] = [["What percentage of calls do small businesses miss in Australia?", "Research commonly cites a 20 to 40 percent miss rate during business hours for small businesses. This is an estimated range rather than a single verified national figure, and it varies by industry. Outside business hours, the miss rate approaches 100 percent for businesses with no answering service or after hours cover, since nobody is available to pick up the phone."], ["Do callers leave voicemail messages?", "Most do not. Published research shows 62 percent of callers who reach a voicemail greeting hang up without leaving a message. That makes voicemail one of the weakest recovery channels for missed calls, because the majority of callers never identify themselves and the business is left with no number to call back."], ["How fast should a business return a missed call?", "Within 5 minutes where possible. The callback conversion curve shows around 71 percent of enquiries convert when the callback happens within 5 minutes, falling to about 55 percent at 30 minutes and roughly 17 percent at 2 hours. The gap between a 5 minute and a 2 hour callback is the difference between a likely sale and a long shot."], ["What happens to after hours calls when nobody answers?", "Without an answering service, after hours calls are effectively 100 percent missed. The caller either listens to a voicemail greeting, where 62 percent hang up, or the line rings out entirely. For trades, clinics, and service businesses, evening and weekend enquiries are often genuine job requests, so the loss lands exactly when customers are ready to book."], ["What is the 100 call funnel?", "It is an illustrative model, not a measurement. Start with 100 inbound calls: 20 to 40 go missed during business hours, every call outside opening hours is missed without after hours cover, and 62 percent of callers who reach voicemail hang up without leaving details. The remaining missed callers depend on a callback, where conversion drops from 71 percent at 5 minutes to 17 percent at 2 hours. The funnel shows how quickly enquiries leak at each stage."], ["Are missed call statistics in Australia verified?", "Some are better supported than others. The 62 percent voicemail hang up rate and the 71, 55, and 17 percent callback conversion figures come from widely cited call handling and sales research. The 20 to 40 percent in hours miss rate is a commonly cited estimated range that varies by study, and the near 100 percent after hours miss rate follows logically from nobody being available to answer. Treat any single precise national figure with caution."]];
+
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+    [title, path],
+  ]),
+  businessSchema(),
+  faqSchema(faqs),
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero"><div class="container narrow reveal">
+      <p class="eyebrow">GUIDE</p>
+      <h1>Missed Call Statistics Australia: What Small Businesses Lose (2026)</h1>
+      <p class="lead">Missed call statistics Australia: 20 to 40 percent of calls missed in hours, near 100 percent after hours, and the callback conversion curve explained.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">Last updated November 2026</p>
+    </div></section>
+
+    <section class="section"><div class="container narrow reveal">
+      <h2>Missed Call Statistics Australia: The 2026 Picture</h2>
+      <p>Every missed call is a customer who dialled a competitor instead. Published research on missed call statistics in Australia points to a consistent pattern: small businesses miss 20 to 40 percent of calls during business hours, and close to 100 percent of calls outside them when no answering service is in place. Voicemail recovers few of those callers, with 62 percent hanging up before leaving a message. This guide pulls the key figures together, explains the callback conversion curve, and works through a 100 call funnel to show where enquiries disappear.</p>
+
+      <h2>20 to 40 Percent of Calls Go Missed During Business Hours</h2>
+      <p>Research commonly cited across Australian and international studies puts the share of calls missed during normal operating hours at 20 to 40 percent. That range matters because a business answering 80 calls a week could be missing 16 to 32 of them. The causes are mundane: staff already on a call, one receptionist covering a workshop, lunch breaks, and peak periods where the phone rings faster than anyone can reach it. Treat the 20 to 40 percent figure as an estimated range rather than a single verified national statistic.</p>
+
+      <h2>After Hours Calls in Australia: Close to 100 Percent Missed</h2>
+      <p>After hours calls in Australia go unanswered every time the office is closed, unless an answering service, after hours receptionist, or automation picks up the line. Published call handling research puts the miss rate near 100 percent for businesses without cover outside standard hours. In practice that means every evening enquiry, weekend job request, and urgent call from a customer in another time zone goes to voicemail or nowhere at all. For trades, clinics, and service businesses, a large share of genuine job enquiries arrive exactly when nobody is at the desk.</p>
+
+      <h2>Voicemail Recovers Very Few Callers: 62 Percent Hang Up</h2>
+      <p>The most consistent figure in the missed calls cost small business research is the voicemail failure rate: 62 percent of callers who reach a voicemail greeting hang up without leaving a message. That makes voicemail a poor recovery channel for missed calls. A caller with an urgent plumbing fault, a parent chasing a clinic appointment, or a customer comparing quotes will simply dial the next business on the search results page. Businesses that rely on voicemail after hours are therefore not capturing enquiries, they are recording how many they lost.</p>
+
+      <h2>The Callback Conversion Curve: 71 Percent at 5 Minutes</h2>
+      <p>Callback speed has a steep, well documented conversion curve. Call back a missed enquiry within 5 minutes and conversion sits around 71 percent. Wait 30 minutes and it falls to 55 percent. Leave it 2 hours and only 17 percent of those callers still convert. The pattern is consistent across sales research: the first business to respond usually wins the job, because customers calling several businesses hand their work to whoever replies first. Every hour of delay moves an enquiry from a warm lead to a restored contact, at best.</p>
+
+      <h2>The 100 Call Funnel: Where Enquiries Disappear</h2>
+      <p>A simple way to see how missed calls cost small business is a 100 call funnel. Start with 100 inbound calls in a month. During business hours, 20 to 40 of them go unanswered, and without after hours cover, every call outside opening hours joins them. Of the missed callers who hit voicemail, 62 percent hang up and never leave a message, so fewer than 4 in 10 missed callers even register. The remainder depend on a callback, where conversion runs 71 percent at 5 minutes, 55 percent at 30 minutes, and just 17 percent at 2 hours. It is an illustrative model, not a measurement, but it shows the leak.</p>
+
+      <h2>How Missed Calls Cost Small Business Revenue</h2>
+      <p>These figures convert directly into lost work. A business missing 20 to 40 percent of in hours calls loses one in five to two in five enquiries before a conversation even starts. Without after hours cover it loses effectively all evening and weekend enquiries. The 62 percent voicemail hang up rate means most of those callers never identify themselves, so the loss is invisible: there is no message to return, no lead in the CRM, and no way to know a customer chose a competitor. Quiet phones during busy periods often signal problems, not success.</p>
+
+      <h2>Verified Figures Versus Estimates: How to Read These Stats</h2>
+      <p>Not every published missed call statistic carries the same weight. The voicemail figure, 62 percent of callers hanging up, and the callback conversion curve of 71 percent at 5 minutes, 55 percent at 30 minutes, and 17 percent at 2 hours come from widely cited sales and call handling research. The 20 to 40 percent in hours miss rate is better described as a commonly cited estimated range, because it varies by industry and study method. The near 100 percent after hours miss rate is a logical consequence of no one being available to answer. Any article quoting a single precise national figure deserves scrutiny.</p>
+
+      <h2>Reducing Missed Calls: What Actually Works</h2>
+      <p>The statistics point to three practical responses. First, answer speed: the 71 percent conversion at 5 minutes rewards any system that routes missed calls to a live answer or an immediate callback within minutes. Second, after hours coverage: since close to 100 percent of out of hours calls are missed without cover, even partial coverage of evenings and weekends captures enquiries competitors lose. Third, replace voicemail as the fallback: with 62 percent of voicemail callers hanging up, an automated answering service that captures the caller's number and promises a fast callback outperforms a plain greeting. Australian businesses can pair these steps with AI call answering for around the clock coverage.</p>
+
+      <h2>Audit Your Own Numbers Before Acting</h2>
+      <p>Published missed call statistics australia wide are useful for benchmarking, but your own phone data is more actionable. Most Australian business phone systems and VoIP providers report unanswered call counts, ring times, and after hours volumes in their dashboards. Compare your missed call percentage against the 20 to 40 percent benchmark, check how many callers reach voicemail and hang up, and time your callbacks against the 71, 55, and 17 percent milestones. Businesses that measure both in hours and after hours performance usually find the fastest wins in the first 5 minute callback window, where conversion is highest.</p>
+
+      <h2>FAQs</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>What percentage of calls do small businesses miss in Australia?</summary><p>Research commonly cites a 20 to 40 percent miss rate during business hours for small businesses. This is an estimated range rather than a single verified national figure, and it varies by industry. Outside business hours, the miss rate approaches 100 percent for businesses with no answering service or after hours cover, since nobody is available to pick up the phone.</p></details>
+        <details class="faq-item"><summary>Do callers leave voicemail messages?</summary><p>Most do not. Published research shows 62 percent of callers who reach a voicemail greeting hang up without leaving a message. That makes voicemail one of the weakest recovery channels for missed calls, because the majority of callers never identify themselves and the business is left with no number to call back.</p></details>
+        <details class="faq-item"><summary>How fast should a business return a missed call?</summary><p>Within 5 minutes where possible. The callback conversion curve shows around 71 percent of enquiries convert when the callback happens within 5 minutes, falling to about 55 percent at 30 minutes and roughly 17 percent at 2 hours. The gap between a 5 minute and a 2 hour callback is the difference between a likely sale and a long shot.</p></details>
+        <details class="faq-item"><summary>What happens to after hours calls when nobody answers?</summary><p>Without an answering service, after hours calls are effectively 100 percent missed. The caller either listens to a voicemail greeting, where 62 percent hang up, or the line rings out entirely. For trades, clinics, and service businesses, evening and weekend enquiries are often genuine job requests, so the loss lands exactly when customers are ready to book.</p></details>
+        <details class="faq-item"><summary>What is the 100 call funnel?</summary><p>It is an illustrative model, not a measurement. Start with 100 inbound calls: 20 to 40 go missed during business hours, every call outside opening hours is missed without after hours cover, and 62 percent of callers who reach voicemail hang up without leaving details. The remaining missed callers depend on a callback, where conversion drops from 71 percent at 5 minutes to 17 percent at 2 hours. The funnel shows how quickly enquiries leak at each stage.</p></details>
+        <details class="faq-item"><summary>Are missed call statistics in Australia verified?</summary><p>Some are better supported than others. The 62 percent voicemail hang up rate and the 71, 55, and 17 percent callback conversion figures come from widely cited call handling and sales research. The 20 to 40 percent in hours miss rate is a commonly cited estimated range that varies by study, and the near 100 percent after hours miss rate follows logically from nobody being available to answer. Treat any single precise national figure with caution.</p></details>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid var(--line);border-radius:12px;">
+        <h2 style="margin-top:0;">Want this set up for your business?</h2>
+        <p style="margin-bottom:0;">We build and manage AI phone and workflow systems for Australian small businesses. <a class="btn primary" href="/contact">Book a free AI audit</a></p>
+      </div>
+
+      <h2>Read next</h2>
+      <ul><li><a href="/services/missed-call-text-back">/services/missed-call-text-back</a></li><li><a href="/guides/ai-receptionist-cost-australia">/guides/ai-receptionist-cost-australia</a></li></ul>
+    </div></section>
+  </main>
+  <Footer />
+</Base>
