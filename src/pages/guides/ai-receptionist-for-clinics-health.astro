@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { breadcrumbSchema, businessSchema, canonicalPath, faqSchema } from '../../data/seo';
+
+const path = '/guides/ai-receptionist-for-clinics-health';
+const title = 'AI Receptionists for Clinics & Allied Health in Australia';
+const description = 'AI receptionist guide for Australian medical, dental and allied health clinics: bookings, intake, Privacy Act duties, triage handoffs and integrations.';
+
+const faqs: [string, string][] = [["Can an AI receptionist book directly into my practice software?", "Often yes, but confirm it for your specific system. Some vendors integrate directly with common Australian practice software such as Best Practice, Halaxy, Cliniko or Nookal, while others send booking requests to staff by email or message. Direct integration is the better outcome because it removes manual re-entry and double booking risk, so ask for a live demonstration on a test calendar before you commit."], ["Is it compliant to let an AI handle patient health information?", "It can be, provided the vendor handles data in line with the Privacy Act and the Australian Privacy Principles. Health information is sensitive information, so the practice stays responsible for what the vendor does with recordings, transcripts and intake details. Check data storage location, retention limits, access controls and breach notification support, and document your due diligence before go live."], ["What must an AI receptionist hand off to a human?", "Anything involving clinical judgement or risk: symptoms, urgency assessments, medication questions, distressed or aggressive callers, billing disputes and anything that could be an emergency. The AI should follow a short script, then transfer to staff or direct the caller to emergency services. Clear written escalation rules are the difference between a safe deployment and a risky one."], ["How much does an AI receptionist cost in Australia?", "Pricing is mostly quoted as a monthly subscription, sometimes with usage charges per call minute or per booking, plus setup fees. Because local vendors are few and published pricing is rare, quotes vary widely. Compare shortlisted vendors on an identical scenario covering your call volume, after hours coverage and integration needs rather than on headline rates alone."], ["Why is the Australian market behind the United States?", "Most attention so far has come from US startups such as Arini and Dentina, which focus on dental practices in the American market. Local adoption has been slower and dedicated Australian options are still limited. That creates an opening for clinics to adopt early, but it also means buyers must do careful due diligence on privacy, telephony and practice software fit."], ["Will patients accept speaking to an AI receptionist?", "Most accept it when the assistant is upfront about what it is, solves the request quickly and hands off smoothly to staff when needed. Problems arise when the AI pretends to be human, loops on a request or blocks access to a person. Disclose the assistant at the start of the call, keep escalation instant and review transcripts so friction is fixed early."]];
+
+const schemas = [
+  breadcrumbSchema([
+    ['Home', '/'],
+    ['Guides', '/guides'],
+    [title, path],
+  ]),
+  businessSchema(),
+  faqSchema(faqs),
+];
+---
+<Base title={title} description={description} canonical={canonicalPath(path)}>
+  <Fragment slot="head">
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </Fragment>
+  <Nav />
+  <main>
+    <section class="section page-hero"><div class="container narrow reveal">
+      <p class="eyebrow">GUIDE</p>
+      <h1>AI Receptionists for Clinics & Allied Health in Australia (2026)</h1>
+      <p class="lead">AI receptionist guide for Australian medical, dental and allied health clinics: bookings, intake, Privacy Act duties, triage handoffs and integrations.</p>
+      <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.7;">Last updated November 2026</p>
+    </div></section>
+
+    <section class="section"><div class="container narrow reveal">
+      <h2>Why clinic front desks are turning to AI receptionists</h2>
+      <p>Clinic reception teams juggle phone calls, walk-ins and paperwork at once, and a missed call usually means a missed booking. An AI receptionist answers every call around the clock, handles routine requests and passes the rest to your team. In the United States, dental focused startups such as Arini and Dentina have made this category visible, while Australian clinics still have few local options. That gap matters: a clinic that adopts early can standardise its booking flow and cut admin load before local competition catches up.</p>
+
+      <h2>What an AI receptionist for medical practice actually does</h2>
+      <p>An AI receptionist for a medical practice sits between your phone line and your practice management system. It answers calls with a clinic specific script, recognises intents such as new bookings, reschedules and general enquiries, and either completes the task or hands over to a human. Unlike a basic answering service, it can check availability, confirm patient details and send confirmations without staff involvement. The practical test is simple: if a task never needs clinical judgement, the AI should complete it end to end.</p>
+
+      <h2>Appointment booking flows that suit clinics</h2>
+      <p>A good booking flow starts by asking why the patient is calling, then maps the answer to the right appointment type and length. The AI should offer real availability from your calendar, collect new patient details, and confirm by SMS or email. Rescheduling and cancellations matter just as much, because every unfilled slot is lost revenue for the practice. Configure rules so urgent presentations are escalated immediately, and so the AI never books into slots reserved for procedures, telehealth or long consultations without checking your rules first.</p>
+
+      <h2>Patient intake: collecting details the safe way</h2>
+      <p>Intake is where front desk automation earns its keep, and where caution is needed. The AI can capture contact details, Medicare information, referral notes and consent confirmations before the visit, which shortens waiting room time and reduces manual entry. Keep the scope narrow: collect only what reception genuinely needs, store it inside approved systems, and avoid open ended questions that invite clinical descriptions. Write the intake script with your practice manager and review transcripts regularly, so questions stay accurate, polite and compliant with your privacy obligations.</p>
+
+      <h2>Privacy Act duties when AI touches health information</h2>
+      <p>Health information is treated as sensitive information under the Privacy Act, which raises the bar for collection, use and disclosure. Your practice remains responsible for patient data even when a vendor handles the calls, so check where recordings and transcripts are stored, who can access them, and whether data stays in Australia. Insist on a clear privacy collection notice at the start of each call, retention limits you control, and alignment with the Australian Privacy Principles. Also confirm the vendor supports your notifiable data breach process, because obligations flow back to the practice.</p>
+
+      <h2>Phone triage boundaries: what AI must hand off</h2>
+      <p>Triage is the hard line. An AI receptionist is not a clinician, so it must never assess symptoms, advise on medication, or decide how urgent a presentation is. Build explicit handoff rules for chest pain, breathing difficulty, bleeding, mental health crises, pregnancy concerns and anything involving children. The safe pattern is a short scripted question, then immediate transfer to staff or an instruction to call emergency services. Record these boundaries in writing, test them with realistic scenarios, and review call logs weekly in the early months to confirm nothing clinical slips through.</p>
+
+      <h2>AI receptionist dental and allied health use cases</h2>
+      <p>Dental practices use AI receptionists for new patient enquiries, recall reminders, treatment plan follow ups and after hours messages. Allied health front desk automation looks different again: physiotherapy, psychology, podiatry and speech pathology clinics juggle recurring appointments, funder specific intake such as NDIS or insurer details, and mobile visit scheduling. Each discipline needs its own appointment types, cancellation rules and funding questions built into the booking flow, so map your most frequent call types before comparing vendors rather than accepting a generic script.</p>
+
+      <h2>Integration with your practice software</h2>
+      <p>Integration decides whether the AI saves time or creates a second job. Ask each vendor exactly how they connect to systems such as Best Practice, MedicalDirector, Halaxy, Cliniko or Nookal, whether bookings appear in your live calendar, and how they avoid double bookings when reception staff work alongside the AI. If a vendor only offers email notifications instead of direct booking, someone will still need to retype every appointment. Also check how patient records created by the AI are matched to existing files, because duplicate records create real clinical risk.</p>
+
+      <h2>US players and the thin Australian market</h2>
+      <p>Most of the visible activity in this category is American. Arini and Dentina both target dental practices in the United States, and their marketing has shaped what clinics expect from an AI receptionist. Australian buyers should note two things: US tools are built around US privacy expectations and phone systems, and local competitors are still scarce, which makes vendor due diligence more important. Treat US case studies as proof the model works, not as evidence a particular product suits an Australian clinic's compliance and telephony environment.</p>
+
+      <h2>What AI receptionists cost and how vendors charge</h2>
+      <p>Most vendors price AI receptionists as a monthly software subscription, often with usage based charges for call minutes or completed bookings on top, plus setup or integration fees at the start. Because the Australian market is thin, published pricing is uncommon and quotes vary widely, so ask every shortlisted vendor to quote the same scenario: expected monthly call volume, after hours coverage and booking integration. Insist on written pricing that separates subscription, usage and setup components, and check contract terms for lock in before you sign anything.</p>
+
+      <h2>Rolling out an AI receptionist without disrupting patients</h2>
+      <p>Start narrow and expand. Begin with after hours calls or overflow during peak periods, keep a human fallback on every path, and tell callers plainly when they are speaking with an assistant rather than a person. Watch measures you already track, such as bookings made and calls transferred, rather than vendor dashboards alone. Review transcripts weekly at first, tighten scripts where patients get stuck, and only widen scope to intake and reminders once the booking flow behaves reliably. Slow rollouts protect both patients and your reputation.</p>
+
+      <h2>FAQs</h2>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Can an AI receptionist book directly into my practice software?</summary><p>Often yes, but confirm it for your specific system. Some vendors integrate directly with common Australian practice software such as Best Practice, Halaxy, Cliniko or Nookal, while others send booking requests to staff by email or message. Direct integration is the better outcome because it removes manual re-entry and double booking risk, so ask for a live demonstration on a test calendar before you commit.</p></details>
+        <details class="faq-item"><summary>Is it compliant to let an AI handle patient health information?</summary><p>It can be, provided the vendor handles data in line with the Privacy Act and the Australian Privacy Principles. Health information is sensitive information, so the practice stays responsible for what the vendor does with recordings, transcripts and intake details. Check data storage location, retention limits, access controls and breach notification support, and document your due diligence before go live.</p></details>
+        <details class="faq-item"><summary>What must an AI receptionist hand off to a human?</summary><p>Anything involving clinical judgement or risk: symptoms, urgency assessments, medication questions, distressed or aggressive callers, billing disputes and anything that could be an emergency. The AI should follow a short script, then transfer to staff or direct the caller to emergency services. Clear written escalation rules are the difference between a safe deployment and a risky one.</p></details>
+        <details class="faq-item"><summary>How much does an AI receptionist cost in Australia?</summary><p>Pricing is mostly quoted as a monthly subscription, sometimes with usage charges per call minute or per booking, plus setup fees. Because local vendors are few and published pricing is rare, quotes vary widely. Compare shortlisted vendors on an identical scenario covering your call volume, after hours coverage and integration needs rather than on headline rates alone.</p></details>
+        <details class="faq-item"><summary>Why is the Australian market behind the United States?</summary><p>Most attention so far has come from US startups such as Arini and Dentina, which focus on dental practices in the American market. Local adoption has been slower and dedicated Australian options are still limited. That creates an opening for clinics to adopt early, but it also means buyers must do careful due diligence on privacy, telephony and practice software fit.</p></details>
+        <details class="faq-item"><summary>Will patients accept speaking to an AI receptionist?</summary><p>Most accept it when the assistant is upfront about what it is, solves the request quickly and hands off smoothly to staff when needed. Problems arise when the AI pretends to be human, loops on a request or blocks access to a person. Disclose the assistant at the start of the call, keep escalation instant and review transcripts so friction is fixed early.</p></details>
+      </div>
+
+      <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid var(--line);border-radius:12px;">
+        <h2 style="margin-top:0;">Want this set up for your business?</h2>
+        <p style="margin-bottom:0;">We build and manage AI phone and workflow systems for Australian small businesses. <a class="btn primary" href="/contact">Book a free AI audit</a></p>
+      </div>
+
+      <h2>Read next</h2>
+      <ul><li><a href="/industries">/industries</a></li><li><a href="/services/ai-receptionist">/services/ai-receptionist</a></li></ul>
+    </div></section>
+  </main>
+  <Footer />
+</Base>
